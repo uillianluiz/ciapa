@@ -8,6 +8,7 @@ import { ContentComponent } from './content/content.component';
 import { FormsModule } from '@angular/forms';
 import { TierCardComponent } from './tiers/tier-card/tier-card.component';
 import { TiersComponent } from './tiers/tiers.component';
+import { TiersService } from './services/tiers.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { TiersComponent } from './tiers/tiers.component';
     ClarityModule.forRoot(),
     FormsModule
   ],
-  providers: [],
+  providers: [TiersService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

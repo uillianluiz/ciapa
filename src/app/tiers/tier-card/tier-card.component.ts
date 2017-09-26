@@ -1,18 +1,32 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { DegradationCPU, DegradationMemory, DegradationAffinity, DegradationCache, DegradationDisk } from '../../util/datatype/Degradation';
+import { Component, OnInit, Input, Injectable } from '@angular/core';
+import {
+  DegradationCPU,
+  DegradationMemory,
+  DegradationAffinity,
+  DegradationCache,
+  DegradationDisk
+} from '../../util/datatype/Degradation';
 import { Tier } from '../../util/datatype/Tier';
+import { TiersService } from '../../services/tiers.service';
 
 @Component({
   selector: 'app-tier-card',
   templateUrl: './tier-card.component.html',
   styleUrls: ['./tier-card.component.scss']
 })
+@Injectable()
 export class TierCardComponent implements OnInit {
-  @Input('tier') tier: Tier;
-  @Input('tiers') tiers: Tier[];
-  constructor() { }
+  @Input('tierId') tierId: number;
+  constructor(private _tiersService: TiersService) {}
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  get tier(): Tier {
+    return this._tiersService.tiers[this.tierId];
+  }
+
+  get tiers(): Tier[] {
+    return this._tiersService.tiers;
   }
 
   get DegradationCPU() {
@@ -33,5 +47,4 @@ export class TierCardComponent implements OnInit {
   get DegradationAffinity() {
     return DegradationAffinity;
   }
-
 }

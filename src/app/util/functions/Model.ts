@@ -20,14 +20,14 @@ class Model {
         let capacities: Capacity[] = [];
         for (let tier of tiers) {
             interferences.push(tier.interference);
-            affinities.push(tier.affinty);
+            affinities.push(tier.affinity);
             capacities.push(tier.capacity);
         }
         return this.costInterference(interferences) * this.costAffinity(affinities, tiers) * this.costCapacity(capacities);
     }
 
     /**
-     * Calculates the cost given by the interference of each resource 
+     * Calculates the cost given by the interference of each resource
      * @param interferences array of interferences
      * @return total interference cost
      */
