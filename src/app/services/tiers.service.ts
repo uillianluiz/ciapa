@@ -89,7 +89,7 @@ export class TiersService {
   }
 
   load(): void {
-    if (localStorage.getItem('tiers') === undefined) {
+    if (localStorage.getItem('tiers') == null) {
       this.toastr.error('There are no tier locally saved.', 'Error');
     } else {
       this.tiers = CircularJSON.parse(localStorage.getItem('tiers'));
