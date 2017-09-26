@@ -1,3 +1,8 @@
-<div class="row" dnd-sortable-container [dropZones]="['tiers']" [sortableData]="tiers">
-  <app-tier-card class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3" *ngFor="let tier of tiers;  let i = index" [tierId]="i" dnd-sortable [sortableIndex]="i"></app-tier-card>
+<div class="content-container">
+  <div class="content-area">
+    <div class="row" dnd-sortable-container [dropZones]="['tiers']" [sortableData]="tiers">
+      <app-tier-card class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3" *ngFor="let tier of tiers;  let i = index" [tierId]="i"
+        dnd-sortable [sortableIndex]="i"></app-tier-card>
+    </div>
+  </div>
 </div>
