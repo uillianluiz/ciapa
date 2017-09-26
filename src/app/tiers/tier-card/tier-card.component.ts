@@ -17,6 +17,9 @@ import { TiersService } from '../../services/tiers.service';
 @Injectable()
 export class TierCardComponent implements OnInit {
   @Input('tierId') tierId: number;
+
+  private _deleteTierModel = false;
+
   constructor(private _tiersService: TiersService) {}
 
   ngOnInit() {}
@@ -50,5 +53,9 @@ export class TierCardComponent implements OnInit {
 
   addAffinityHandler(): void {
     this._tiersService.addAffinity(this.tierId);
+  }
+
+  deleteTierHandler(): void {
+    this._tiersService.tiers.splice(this.tierId, 1);
   }
 }

@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ClarityModule } from 'clarity-angular';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -27,9 +28,10 @@ import { AffinityComponent } from './tiers/tier-card/affinity/affinity.component
   imports: [
     BrowserModule,
     ClarityModule.forRoot(),
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule
   ],
   providers: [TiersService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

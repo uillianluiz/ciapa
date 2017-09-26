@@ -18,7 +18,18 @@
 
     <div class="card-footer">
       <button class="btn btn-success-outline" (click)="addAffinityHandler()">Add Affinity</button>
-      <button class="btn btn-warning-outline">Delete Tier</button>
+      <button class="btn btn-warning-outline" (click)="_deleteTierModel = true">Delete Tier</button>
     </div>
   </div>
 </div>
+
+<clr-modal [(clrModalOpen)]="_deleteTierModel" [clrModalStaticBackdrop]="true" [clrModalClosable]="false">
+    <h3 class="modal-title">Are you sure you want to delete {{tier.name}}?</h3>
+    <div class="modal-body">
+        <p>This action cannot be undone.</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline" (click)="_deleteTierModel = false">Cancel</button>
+        <button type="button" class="btn btn-warning" (click)="deleteTierHandler(); _deleteTierModel = false">Delete</button>
+    </div>
+</clr-modal>
