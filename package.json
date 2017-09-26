@@ -8,7 +8,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "watch": "./node_modules/typescript/bin/tsc -w"
   },
   "private": true,
   "dependencies": {
@@ -21,7 +22,13 @@
     "@angular/platform-browser": "^4.2.4",
     "@angular/platform-browser-dynamic": "^4.2.4",
     "@angular/router": "^4.2.4",
+    "@types/lodash": "^4.14.74",
+    "@webcomponents/custom-elements": "^1.0.0",
+    "clarity-angular": "^0.10.6",
+    "clarity-icons": "^0.10.6",
+    "clarity-ui": "^0.10.6",
     "core-js": "^2.4.1",
+    "lodash": "^4.17.4",
     "rxjs": "^5.4.2",
     "zone.js": "^0.8.14"
   },

@@ -1,0 +1,10 @@
+button{
+    outline: none;
+}
+
+.branding{
+    cursor: pointer;
+    text-align: center; 
+    color: white;
+    vertical-align: middle;
+}

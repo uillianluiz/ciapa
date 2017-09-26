@@ -1,0 +1,123 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header">
+      {{tier.name}}
+    </div>
+    <div class="card-block">
+
+      <div class="card-title">
+        Size:
+      </div>
+      <div class="card-text">
+        <div class="row">
+          <div class="col-md-4">% of PM:</div>
+          <div class="col-md-8">
+            <div class="select">
+              <select id="size" [(ngModel)]="tier.capacity.capacity">
+                  <option [value]="0.05">Nano 0.05%</option>
+                  <option [value]="0.10">Micro 0.10%</option>
+                  <option [value]="0.15">Small 0.15%</option>
+                  <option [value]="0.20">Medium 0.20%</option>
+                  <option [value]="0.30">Large 0.30%</option>
+                  <option [value]="0.40">Xlarge 0.40%</option>
+                </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-title">
+        Interference:
+      </div>
+      <div class="card-text">
+        <div class="row">
+          <div class="col-md-4">CPU:</div>
+          <div class="col-md-8">
+            <div class="select">
+              <select id="cpu" [(ngModel)]="tier.interference.cpu">
+                <option [value]="DegradationCPU.Absent">Absent</option>
+                <option [value]="DegradationCPU.Low">Low</option>
+                <option [value]="DegradationCPU.Moderate">Moderate</option>
+                <option [value]="DegradationCPU.High">High</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">Memory:</div>
+          <div class="col-md-8">
+            <div class="select">
+              <select id="memory" [(ngModel)]="tier.interference.memory">
+                <option [value]="DegradationMemory.Absent">Absent</option>
+                <option [value]="DegradationMemory.Low">Low</option>
+                <option [value]="DegradationMemory.Moderate">Moderate</option>
+                <option [value]="DegradationMemory.High">High</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">Disk:</div>
+          <div class="col-md-8">
+            <div class="select">
+              <select id="disk" [(ngModel)]="tier.interference.disk">
+                <option [value]="DegradationDisk.Absent">Absent</option>
+                <option [value]="DegradationDisk.Low">Low</option>
+                <option [value]="DegradationDisk.Moderate">Moderate</option>
+                <option [value]="DegradationDisk.High">High</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">Cache:</div>
+          <div class="col-md-8">
+            <div class="select">
+              <select id="cache" [(ngModel)]="tier.interference.cache">
+                  <option [value]="DegradationCache.Absent">Absent</option>
+                  <option [value]="DegradationCache.Low">Low</option>
+                  <option [value]="DegradationCache.Moderate">Moderate</option>
+                  <option [value]="DegradationCache.High">High</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-title">
+        Affinity:
+      </div>
+      <div class="card-text">
+
+        <span *ngIf="tier.affinity.affinities.length == 0">None</span>
+        <div class="row" *ngFor="let affinity of tier.affinity.affinities">
+          <div class="col-sm-4">
+            <div class="select">
+                <select [(ngModel)]="affinity.tier">
+                  <option *ngFor="let t of tiers" [value]="t">{{t.name}}</option>
+                </select>
+              </div>
+          </div>
+          <div class="col-md-6">
+            <div class="select">
+              <select [(ngModel)]="affinity.affinity">
+                <option [value]="DegradationAffinity.Absent">Absent</option>
+                <option [value]="DegradationAffinity.Low">Low</option>
+                <option [value]="DegradationAffinity.Moderate">Moderate</option>
+                <option [value]="DegradationAffinity.High">High</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-2">
+                <clr-icon shape="times"></clr-icon>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div class="card-footer">
+        <button class="btn btn-success-outline">Add Affinity</button>
+        <button class="btn btn-warning-outline">Delete</button>
+    </div>
+  </div>
+</div>
