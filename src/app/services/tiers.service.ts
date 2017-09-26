@@ -44,11 +44,11 @@ export class TiersService {
     tier2.name = 'tier2';
     this.tiers.push(tier2);
 
-    console.log(tier2);
+
   }
 
   addAffinity(tierId: number): void {
-    this.tiers[tierId].affinity.addAffinity(new AffinityElement(null, 0));
+    this.tiers[tierId].affinity.addAffinity(new AffinityElement(null, DegradationAffinity.Absent));
   }
 
 }

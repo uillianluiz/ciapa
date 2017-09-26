@@ -47,4 +47,8 @@ export class TierCardComponent implements OnInit {
   get DegradationAffinity() {
     return DegradationAffinity;
   }
+
+  addAffinityHandler(): void {
+    this._tiersService.addAffinity(this.tierId);
+  }
 }

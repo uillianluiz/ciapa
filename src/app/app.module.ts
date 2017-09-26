@@ -9,6 +9,9 @@ import { FormsModule } from '@angular/forms';
 import { TierCardComponent } from './tiers/tier-card/tier-card.component';
 import { TiersComponent } from './tiers/tiers.component';
 import { TiersService } from './services/tiers.service';
+import { InterferenceComponent } from './tiers/tier-card/interference/interference.component';
+import { CapacityComponent } from './tiers/tier-card/capacity/capacity.component';
+import { AffinityComponent } from './tiers/tier-card/affinity/affinity.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,10 @@ import { TiersService } from './services/tiers.service';
     NavbarComponent,
     ContentComponent,
     TierCardComponent,
-    TiersComponent
+    TiersComponent,
+    InterferenceComponent,
+    CapacityComponent,
+    AffinityComponent
   ],
   imports: [
     BrowserModule,

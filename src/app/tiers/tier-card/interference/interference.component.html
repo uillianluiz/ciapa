@@ -1,0 +1,14 @@
+<div class="card-text">
+  <div class="row">
+    <div class="col-md-4">{{ name }}:</div>
+    <div class="col-md-8">
+      <div class="select">
+        <select [(ngModel)]="interference">
+          <option [value]="degradation.Absent">Absent</option>
+          <option [value]="degradation.Low">Low</option>
+          <option [value]="degradation.Moderate">Moderate</option>
+          <option [value]="degradation.High">High</option>
+        </select>
+      </div>
+    </div>
+  </div>
