@@ -18,7 +18,23 @@ import { ToastrService } from 'ngx-toastr';
 export class TiersService {
   public tiers: Tier[] = [];
 
-  private interference(): Interference {
+  private getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min; // The maximum is exclusive and the minimum is inclusive
+  }
+
+
+  private interference(random = false): Interference {
+    if (random) {
+      const opt = ['Absent', 'Low', 'Moderate', 'High'];
+      return new Interference(
+        DegradationCPU[opt[this.getRandomInt(0, 4)]],
+        DegradationMemory[opt[this.getRandomInt(0, 4)]],
+        DegradationDisk[opt[this.getRandomInt(0, 4)]],
+        DegradationCache[opt[this.getRandomInt(0, 4)]],
+      );
+    }
     return new Interference(
       DegradationCPU.Absent,
       DegradationMemory.Absent,
@@ -71,8 +87,14 @@ export class TiersService {
   }
 
   newTier(): void {
-    this.tiers.push(
+    this.tiers.unshift(
       new Tier(this.interference(), this.affinity(), this.capacity())
+    );
+  }
+
+  newRandomTier(): void {
+    this.tiers.unshift(
+      new Tier(this.interference(true), this.affinity(), this.capacity())
     );
   }
 

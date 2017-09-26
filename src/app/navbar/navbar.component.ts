@@ -24,6 +24,10 @@ export class NavbarComponent implements OnInit {
     this._tiersService.newTier();
   }
 
+  newRandomTier(): void {
+    this._tiersService.newRandomTier();
+  }
+
   executeSA(): void {
     this._placementService.execute();
   }
