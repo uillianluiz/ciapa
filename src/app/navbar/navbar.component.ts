@@ -23,7 +23,16 @@ export class NavbarComponent implements OnInit {
   newTier(): void {
     this._tiersService.newTier();
   }
+
   executeSA(): void {
     this._placementService.executeSA();
+  }
+
+  save(): void {
+    this._tiersService.save();
+  }
+
+  load(): void {
+    this._tiersService.load();
   }
 }

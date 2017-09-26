@@ -11,6 +11,8 @@ import {
 import { Affinity, AffinityElement } from '../util/datatype/Affinity';
 import { Capacity } from '../util/datatype/Capacity';
 
+import * as CircularJSON from 'circular-json';
+
 @Injectable()
 export class TiersService {
   public tiers: Tier[] = [];
@@ -68,6 +70,23 @@ export class TiersService {
   }
 
   newTier(): void {
-    this.tiers.push(new Tier(this.interference(), this.affinity(), this.capacity()));
+    this.tiers.push(
+      new Tier(this.interference(), this.affinity(), this.capacity())
+    );
+  }
+
+  /**
+   * Convert tiers to string (JSON), changing the tiers references to their id
+   */
+  save(): void {
+    const str = CircularJSON.stringify(this.tiers);
+    localStorage.setItem('tiers', str);
+    return;
+    //const str = Tier.filterToJson(this.tiers);
+    //localStorage.setItem('tiers', str);
+  }
+
+  load(): void {
+    this.tiers = CircularJSON.parse(localStorage.getItem('tiers'));
   }
 }

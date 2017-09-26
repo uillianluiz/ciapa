@@ -1,5 +1,7 @@
 import { PM } from './PM';
 import { Tier } from './Tier';
+import * as CircularJSON from 'circular-json';
+
 
 class Solution {
   public PMs: PM[] = [];
@@ -9,13 +11,15 @@ class Solution {
      * @param old solution to be copied
      */
   public static copy(old: Solution): Solution {
+    // console.log(JSON.stringify(old, Tier.filterToJson));
     const newSolution = <Solution>Object.assign(
       new Solution(),
-      JSON.parse(JSON.stringify(old))
+      CircularJSON.parse(CircularJSON.stringify(old))
     );
 
     for (let i = 0; i < newSolution.PMs.length; i++) {
       newSolution.PMs[i] = <PM>Object.assign(new PM(), newSolution.PMs[i]);
+
     }
 
     return newSolution;

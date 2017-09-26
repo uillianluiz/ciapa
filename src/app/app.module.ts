@@ -9,12 +9,12 @@ import { FormsModule } from '@angular/forms';
 import { InterferenceComponent } from './tiers/tier-card/interference/interference.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NgModule } from '@angular/core';
+import { PlacementComponent } from './placement/placement.component';
+import { PlacementService } from './services/placement.service';
+import { RoutingModule } from './routing.module';
 import { TierCardComponent } from './tiers/tier-card/tier-card.component';
 import { TiersComponent } from './tiers/tiers.component';
 import { TiersService } from './services/tiers.service';
-import { RoutingModule } from './routing.module';
-import { PlacementComponent } from './placement/placement.component';
-import { PlacementService } from './services/placement.service';
 
 @NgModule({
   declarations: [
