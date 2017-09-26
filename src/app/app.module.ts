@@ -15,6 +15,7 @@ import { RoutingModule } from './routing.module';
 import { TierCardComponent } from './tiers/tier-card/tier-card.component';
 import { TiersComponent } from './tiers/tiers.component';
 import { TiersService } from './services/tiers.service';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { TiersService } from './services/tiers.service';
     ClarityModule.forRoot(),
     FormsModule,
     BrowserAnimationsModule,
-    DndModule.forRoot()
+    DndModule.forRoot(),
+    ToastrModule.forRoot(), // ToastrModule added
   ],
   providers: [TiersService, PlacementService],
   bootstrap: [AppComponent]

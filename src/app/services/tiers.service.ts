@@ -12,6 +12,7 @@ import { Affinity, AffinityElement } from '../util/datatype/Affinity';
 import { Capacity } from '../util/datatype/Capacity';
 
 import * as CircularJSON from 'circular-json';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class TiersService {
@@ -34,7 +35,7 @@ export class TiersService {
     return new Capacity(0.05);
   }
 
-  constructor() {
+  constructor(private toastr: ToastrService) {
     const tier3Interference = new Interference(
       DegradationCPU.Moderate,
       DegradationMemory.High,
@@ -81,12 +82,21 @@ export class TiersService {
   save(): void {
     const str = CircularJSON.stringify(this.tiers);
     localStorage.setItem('tiers', str);
-    return;
-    //const str = Tier.filterToJson(this.tiers);
-    //localStorage.setItem('tiers', str);
+    this.toastr.success(
+      'Tiers were successfully saved in your local storage.',
+      'Success'
+    );
   }
 
   load(): void {
-    this.tiers = CircularJSON.parse(localStorage.getItem('tiers'));
+    if (localStorage.getItem('tiers') === undefined) {
+      this.toastr.error('There are no tier locally saved.', 'Error');
+    } else {
+      this.tiers = CircularJSON.parse(localStorage.getItem('tiers'));
+      this.toastr.success(
+        'Tiers were successfully loaded from your local storage.',
+        'Success'
+      );
+    }
   }
 }
