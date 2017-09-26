@@ -4,14 +4,14 @@
 <div class="card-text">
   <span *ngIf="affinity.affinities.length == 0">None</span>
   <div class="row" *ngFor="let affinityElement of affinity.affinities; let i = index">
-    <div class="col-sm-4">
+    <div class="col-xs-4">
       <div class="select">
         <select [(ngModel)]="affinityElement.tier">
             <option *ngFor="let t of tiers" [value]="t">{{t.name}}</option>
           </select>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-xs-6">
       <div class="select">
         <select [(ngModel)]="affinityElement.affinity">
           <option [value]="degradation.Absent">Absent</option>
@@ -21,7 +21,7 @@
         </select>
       </div>
     </div>
-    <div class="col-md-2" class="remove" (click)="removeAffinityHandler(i)">
+    <div class="col-xs-2" class="remove" (click)="removeAffinityHandler(i)">
       <clr-icon shape="times"></clr-icon>
     </div>
   </div>

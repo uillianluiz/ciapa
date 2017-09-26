@@ -13,10 +13,19 @@ import { Capacity } from '../util/datatype/Capacity';
 
 @Injectable()
 export class TiersService {
-
   public tiers: Tier[] = [];
-  constructor() {
 
+  private interference: Interference = new Interference(
+    DegradationCPU.Absent,
+    DegradationMemory.Absent,
+    DegradationDisk.Absent,
+    DegradationCache.Absent
+  );
+  private affinity: Affinity = new Affinity();
+  private capacity: Capacity = new Capacity(0.05);
+
+
+  constructor() {
     const tier3Interference = new Interference(
       DegradationCPU.Moderate,
       DegradationMemory.High,
@@ -43,12 +52,15 @@ export class TiersService {
     const tier2 = new Tier(tier2Interference, tier2Affinity, tier2Capacity);
     tier2.name = 'tier2';
     this.tiers.push(tier2);
-
-
   }
 
   addAffinity(tierId: number): void {
-    this.tiers[tierId].affinity.addAffinity(new AffinityElement(null, DegradationAffinity.Absent));
+    this.tiers[tierId].affinity.addAffinity(
+      new AffinityElement(null, DegradationAffinity.Absent)
+    );
   }
 
+  newTier(): void {
+    this.tiers.push(new Tier(this.interference, this.affinity, this.capacity));
+  }
 }

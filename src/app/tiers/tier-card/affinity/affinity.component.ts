@@ -19,13 +19,7 @@ export class AffinityComponent implements OnInit {
   }
 
   get tiers(): Tier[] {
-    const availableTiers: Tier[] = [];
-    for (const tier of this._tiersService.tiers){
-      if (tier !== this._tiersService.tiers[this.tierId]) {
-        availableTiers.push(tier);
-      }
-    }
-    return availableTiers;
+    return this._tiersService.tiers;
   }
 
   removeAffinityHandler(index: number): void {

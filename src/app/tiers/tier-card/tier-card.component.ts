@@ -18,7 +18,7 @@ import { TiersService } from '../../services/tiers.service';
 export class TierCardComponent implements OnInit {
   @Input('tierId') tierId: number;
 
-  private _deleteTierModel = false;
+  private _deleteTierModal = false;
 
   constructor(private _tiersService: TiersService) {}
 
