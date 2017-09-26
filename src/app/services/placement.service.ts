@@ -15,6 +15,7 @@ export class PlacementService {
     const initialSolution: Solution = new Solution();
     for (let i = 0; i < this.numberOfPMs; i++) {
       const pm = new PM();
+      pm.name = `PM${i + 1}`;
       initialSolution.PMs.push(pm);
     }
 

@@ -1,13 +1,13 @@
 <div class="card-text">
   <div class="row">
-    <div class="col-xs-4">{{ name }}:</div>
+    <div class="col-xs-4">{{ interferenceName }}:</div>
     <div class="col-xs-8">
       <div class="select">
-        <select [(ngModel)]="interference">
-          <option [value]="degradation.Absent">Absent</option>
-          <option [value]="degradation.Low">Low</option>
-          <option [value]="degradation.Moderate">Moderate</option>
-          <option [value]="degradation.High">High</option>
+        <select [(ngModel)]="interference[name]">
+          <option [ngValue]="degradation.Absent">Absent</option>
+          <option [ngValue]="degradation.Low">Low</option>
+          <option [ngValue]="degradation.Moderate">Moderate</option>
+          <option [ngValue]="degradation.High">High</option>
         </select>
       </div>
     </div>

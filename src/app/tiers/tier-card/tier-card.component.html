@@ -10,13 +10,13 @@
     </div>
   </div>
   <div class="card-block">
-    <app-capacity [(capacity)]="tier.capacity.capacity"></app-capacity>
+    <app-capacity [(capacity)]="tier.capacity"></app-capacity>
 
     <div class="card-title">Interference: </div>
-    <app-interference name="CPU" [degradation]="DegradationCPU" [(interference)]="tier.interference.cpu"></app-interference>
-    <app-interference name="Memory" [degradation]="DegradationMemory" [(interference)]="tier.interference.memory"></app-interference>
-    <app-interference name="Disk" [degradation]="DegradationDisk" [(interference)]="tier.interference.disk"></app-interference>
-    <app-interference name="Cache" [degradation]="DegradationCache" [(interference)]="tier.interference.cache"></app-interference>
+    <app-interference name="cpu" [degradation]="DegradationCPU" [(interference)]="tier.interference"></app-interference>
+    <app-interference name="memory" [degradation]="DegradationMemory" [(interference)]="tier.interference"></app-interference>
+    <app-interference name="disk" [degradation]="DegradationDisk" [(interference)]="tier.interference"></app-interference>
+    <app-interference name="cache" [degradation]="DegradationCache" [(interference)]="tier.interference"></app-interference>
 
 
     <app-affinity [degradation]="DegradationAffinity" [tierId]="tierId" [(affinity)]="tier.affinity"></app-affinity>

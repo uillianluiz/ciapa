@@ -6,13 +6,13 @@
     <div class="col-xs-4">% of PM:</div>
     <div class="col-xs-8">
       <div class="select">
-        <select id="size" [(ngModel)]="capacity">
-            <option [value]="0.05">Nano 0.05%</option>
-            <option [value]="0.10">Micro 0.10%</option>
-            <option [value]="0.15">Small 0.15%</option>
-            <option [value]="0.20">Medium 0.20%</option>
-            <option [value]="0.30">Large 0.30%</option>
-            <option [value]="0.40">Xlarge 0.40%</option>
+        <select id="size" [(ngModel)]="capacity.capacity">
+            <option [ngValue]="0.05">Nano 0.05%</option>
+            <option [ngValue]="0.10">Micro 0.10%</option>
+            <option [ngValue]="0.15">Small 0.15%</option>
+            <option [ngValue]="0.20">Medium 0.20%</option>
+            <option [ngValue]="0.30">Large 0.30%</option>
+            <option [ngValue]="0.40">Xlarge 0.40%</option>
           </select>
       </div>
     </div>

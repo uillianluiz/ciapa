@@ -15,15 +15,22 @@ import { Capacity } from '../util/datatype/Capacity';
 export class TiersService {
   public tiers: Tier[] = [];
 
-  private interference: Interference = new Interference(
-    DegradationCPU.Absent,
-    DegradationMemory.Absent,
-    DegradationDisk.Absent,
-    DegradationCache.Absent
-  );
-  private affinity: Affinity = new Affinity();
-  private capacity: Capacity = new Capacity(0.05);
+  private interference(): Interference {
+    return new Interference(
+      DegradationCPU.Absent,
+      DegradationMemory.Absent,
+      DegradationDisk.Absent,
+      DegradationCache.Absent
+    );
+  }
 
+  private affinity(): Affinity {
+    return new Affinity();
+  }
+
+  private capacity(): Capacity {
+    return new Capacity(0.05);
+  }
 
   constructor() {
     const tier3Interference = new Interference(
@@ -61,6 +68,6 @@ export class TiersService {
   }
 
   newTier(): void {
-    this.tiers.push(new Tier(this.interference, this.affinity, this.capacity));
+    this.tiers.push(new Tier(this.interference(), this.affinity(), this.capacity()));
   }
 }
