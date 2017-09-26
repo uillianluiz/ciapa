@@ -8,10 +8,11 @@ import { PM } from '../util/datatype/PM';
 @Injectable()
 export class PlacementService {
   public numberOfPMs = 2;
-  public solution: Solution = null;
+  public solutions = undefined;
+
   constructor(public _tiersService: TiersService) {}
 
-  private generateInitialSolution(): Solution {
+  private executeRR(): Solution {
     const initialSolution: Solution = new Solution();
     for (let i = 0; i < this.numberOfPMs; i++) {
       const pm = new PM();
@@ -24,16 +25,32 @@ export class PlacementService {
         this._tiersService.tiers[i]
       );
     }
-
     return initialSolution;
   }
 
-  executeSA(): void {
-    this.solution = null;
+  execute() {
     if (this.numberOfPMs > this._tiersService.tiers.length) {
       this.numberOfPMs = this._tiersService.tiers.length;
     }
+
+    this.solutions = undefined;
+    const solutions = [];
+
+    solutions.push({
+      algorithm: 'Simulated Annealing',
+      solution: this.executeSA()
+    });
+
+    solutions.push({
+      algorithm: 'Round Robin',
+      solution: this.executeRR()
+    });
+
+    this.solutions = solutions;
+  }
+
+  executeSA(): Solution {
     const simulatedAnnealing = new SimulatedAnnealing();
-    this.solution = simulatedAnnealing.exec(this.generateInitialSolution());
+    return simulatedAnnealing.exec(this.executeRR());
   }
 }

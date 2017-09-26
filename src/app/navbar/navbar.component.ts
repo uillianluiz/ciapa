@@ -25,7 +25,7 @@ export class NavbarComponent implements OnInit {
   }
 
   executeSA(): void {
-    this._placementService.executeSA();
+    this._placementService.execute();
   }
 
   save(): void {
