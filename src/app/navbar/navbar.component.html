@@ -6,26 +6,37 @@
     </div>
   </div>
   <div class="header-nav">
-    <a routerLink="/tiers" class="nav-link nav-text active">Tiers</a>
-    <a routerLink="/placement" class="nav-link nav-text">Placement</a>
+    <a routerLink="/tiers" class="nav-link nav-text" [class.active]="router.url === '/tiers'">Tiers</a>
+    <a routerLink="/placement" class="nav-link nav-text" [class.active]="router.url === '/placement'">Placement</a>
   </div>
   <div class="header-actions">
 
   </div>
 </header>
-<nav class="subnav">
+<nav class="subnav" *ngIf="router.url === '/tiers'">
   <ul class="nav">
     <li class="nav-item">
-      <a class="nav-link" href="#">Save</a>
+      <a class="nav-link" href="javascript://">Save</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">Export</a>
+      <a class="nav-link" href="javascript://">Export</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">Import</a>
+      <a class="nav-link" href="javascript://">Import</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#" (click)="newTier()">New Tier</a>
+      <a class="nav-link" href="javascript://" (click)="newTier()">New Tier</a>
+    </li>
+  </ul>
+</nav>
+
+<nav class="subnav" *ngIf="router.url === '/placement'">
+  <ul class="nav">
+    <li class="nav-item">
+      Number of PMs: <input type="number" min="0" max="1000" [(ngModel)]="_placementService.numberOfPMs" class="numberOfPMs">
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="javascript://" (click)="executeSA()">Execute</a>
     </li>
   </ul>
 </nav>

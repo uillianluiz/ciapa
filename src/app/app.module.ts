@@ -14,6 +14,7 @@ import { TiersComponent } from './tiers/tiers.component';
 import { TiersService } from './services/tiers.service';
 import { RoutingModule } from './routing.module';
 import { PlacementComponent } from './placement/placement.component';
+import { PlacementService } from './services/placement.service';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { PlacementComponent } from './placement/placement.component';
     BrowserAnimationsModule,
     DndModule.forRoot()
   ],
-  providers: [TiersService],
+  providers: [TiersService, PlacementService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

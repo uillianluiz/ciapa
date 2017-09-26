@@ -1,13 +1,13 @@
-import { Tier } from "../datatype/Tier";
-import { Interference } from "../datatype/Interference";
-import { Affinity } from "../datatype/Affinity";
-import { Capacity } from "../datatype/Capacity";
+import { Tier } from '../datatype/Tier';
+import { Interference } from '../datatype/Interference';
+import { Affinity } from '../datatype/Affinity';
+import { Capacity } from '../datatype/Capacity';
 
 
 
 class Model {
 
-    private MAX: number = 100;
+    private MAX = 100;
 
     /**
      * Calculates the total cost of running the given tiers in the same PM
@@ -15,10 +15,10 @@ class Model {
      * @return total placement cost of the given tiers
      */
     cost(tiers: Tier[]) {
-        let interferences: Interference[] = [];
-        let affinities: Affinity[] = [];
-        let capacities: Capacity[] = [];
-        for (let tier of tiers) {
+        const interferences: Interference[] = [];
+        const affinities: Affinity[] = [];
+        const capacities: Capacity[] = [];
+        for (const tier of tiers) {
             interferences.push(tier.interference);
             affinities.push(tier.affinity);
             capacities.push(tier.capacity);

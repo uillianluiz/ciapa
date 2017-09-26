@@ -18,6 +18,14 @@ class PM {
         this.name = "PM" + PM.counter++;
     }
 
+    getCapacity(): number {
+      let used = 0;
+      for (const tier of this.tiers) {
+        used += tier.capacity.capacity;
+      }
+      return used;
+    }
+
     /**
      * It calculates and returns the cost of running the tiers together in this PM.
      * It keeps the result while the tiers in the PM don't change.

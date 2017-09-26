@@ -4,7 +4,11 @@ button{
 
 .branding{
     cursor: pointer;
-    text-align: center; 
+    text-align: center;
     color: white;
     vertical-align: middle;
+}
+
+.numberOfPMs {
+  width: 8px;
 }

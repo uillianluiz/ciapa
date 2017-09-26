@@ -5,7 +5,11 @@ import { TiersComponent } from './tiers/tiers.component';
 import { PlacementComponent } from './placement/placement.component';
 
 const routes: Routes = [
-  { path: '', component: TiersComponent },
+  {
+    path: '',
+    redirectTo: '/tiers',
+    pathMatch: 'full'
+  },
   { path: 'tiers', component: TiersComponent },
   { path: 'placement', component: PlacementComponent },
   { path: '**', redirectTo: '/404' }

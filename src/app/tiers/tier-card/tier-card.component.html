@@ -1,41 +1,40 @@
-
-  <div class="card">
-    <div class="card-header">
-      <div class="form-group">
-        <label for="name" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-md" [ngClass]="tier.name == '' ? 'invalid' : ''">
+<div class="card">
+  <div class="card-header">
+    <div class="form-group">
+      <label for="name" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-md" [ngClass]="tier.name == '' ? 'invalid' : ''">
             <input type="text" id="name" [(ngModel)]="tier.name" placeholder="Name">
             <span class="tooltip-content">
                 This field cannot be empty!
             </span>
         </label>
-      </div>
-    </div>
-    <div class="card-block">
-      <app-capacity [(capacity)]="tier.capacity.capacity"></app-capacity>
-
-      <div class="card-title">Interference: </div>
-      <app-interference name="CPU" [degradation]="DegradationCPU" [(interference)]="tier.interference.cpu"></app-interference>
-      <app-interference name="Memory" [degradation]="DegradationMemory" [(interference)]="tier.interference.memory"></app-interference>
-      <app-interference name="Disk" [degradation]="DegradationDisk" [(interference)]="tier.interference.disk"></app-interference>
-      <app-interference name="Cache" [degradation]="DegradationCache" [(interference)]="tier.interference.cache"></app-interference>
-
-
-      <app-affinity [degradation]="DegradationAffinity" [tierId]="tierId" [(affinity)]="tier.affinity"></app-affinity>
-    </div>
-
-    <div class="card-footer">
-      <button class="btn btn-success-outline" (click)="addAffinityHandler()"><clr-icon shape="plus"></clr-icon> Affinity</button>
-      <button class="btn btn-warning-outline" (click)="_deleteTierModal = true"><clr-icon shape="trash"></clr-icon> Tier</button>
     </div>
   </div>
+  <div class="card-block">
+    <app-capacity [(capacity)]="tier.capacity.capacity"></app-capacity>
+
+    <div class="card-title">Interference: </div>
+    <app-interference name="CPU" [degradation]="DegradationCPU" [(interference)]="tier.interference.cpu"></app-interference>
+    <app-interference name="Memory" [degradation]="DegradationMemory" [(interference)]="tier.interference.memory"></app-interference>
+    <app-interference name="Disk" [degradation]="DegradationDisk" [(interference)]="tier.interference.disk"></app-interference>
+    <app-interference name="Cache" [degradation]="DegradationCache" [(interference)]="tier.interference.cache"></app-interference>
+
+
+    <app-affinity [degradation]="DegradationAffinity" [tierId]="tierId" [(affinity)]="tier.affinity"></app-affinity>
+  </div>
+
+  <div class="card-footer">
+    <button class="btn btn-success-outline" (click)="addAffinityHandler()"><clr-icon shape="plus"></clr-icon> Affinity</button>
+    <button class="btn btn-warning-outline" (click)="_deleteTierModal = true"><clr-icon shape="trash"></clr-icon> Tier</button>
+  </div>
+</div>
 
 <clr-modal [(clrModalOpen)]="_deleteTierModal" [clrModalStaticBackdrop]="true" [clrModalClosable]="false">
-    <h3 class="modal-title">Are you sure you want to delete {{tier.name}}?</h3>
-    <div class="modal-body">
-        <p>This action cannot be undone.</p>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-outline" (click)="_deleteTierModal = false">Cancel</button>
-        <button type="button" class="btn btn-warning" (click)="deleteTierHandler(); _deleteTierModal = false"><clr-icon shape="trash"></clr-icon> Delete</button>
-    </div>
+  <h3 class="modal-title">Are you sure you want to delete {{tier.name}}?</h3>
+  <div class="modal-body">
+    <p>This action cannot be undone.</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="_deleteTierModal = false">Cancel</button>
+    <button type="button" class="btn btn-warning" (click)="deleteTierHandler(); _deleteTierModal = false"><clr-icon shape="trash"></clr-icon> Delete</button>
+  </div>
 </clr-modal>
