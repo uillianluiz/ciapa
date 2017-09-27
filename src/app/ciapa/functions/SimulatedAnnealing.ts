@@ -37,9 +37,6 @@ class SimulatedAnnealing {
     let noChange = 0;
     const maxNoChange = 1000;
 
-    console.log('Using costFunction: ');
-    console.log(best[costFunction]);
-
     while (temperature > 1 && noChange < maxNoChange) {
       numOp++;
       const newSolution = Solution.copy(currentSolution);
