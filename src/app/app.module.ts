@@ -18,6 +18,8 @@ import { TiersService } from './services/tiers.service';
 import { ToastrModule } from 'ngx-toastr';
 import { SettingsComponent } from './placement/settings/settings.component';
 import { ResultsComponent } from './placement/results/results.component';
+import { ChartsModule } from 'ng2-charts';
+import { ChartsComponent } from './placement/results/charts/charts.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { ResultsComponent } from './placement/results/results.component';
     AffinityComponent,
     PlacementComponent,
     SettingsComponent,
-    ResultsComponent
+    ResultsComponent,
+    ChartsComponent
   ],
   imports: [
     RoutingModule,
@@ -39,7 +42,8 @@ import { ResultsComponent } from './placement/results/results.component';
     FormsModule,
     BrowserAnimationsModule,
     DndModule.forRoot(),
-    ToastrModule.forRoot(), // ToastrModule added
+    ToastrModule.forRoot(), // ToastrModule added,
+    ChartsModule
   ],
   providers: [TiersService, PlacementService],
   bootstrap: [AppComponent]

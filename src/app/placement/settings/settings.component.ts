@@ -8,7 +8,7 @@ import { PlacementService } from '../../services/placement.service';
 })
 export class SettingsComponent implements OnInit {
 
-  public costFunction = 'getCost';
+  public costFunction = 'getCostAVG';
   constructor(
     public _placementService: PlacementService
   ) { }

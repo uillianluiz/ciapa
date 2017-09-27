@@ -10,8 +10,12 @@ import { ToastrService } from 'ngx-toastr';
 export class PlacementService {
   public numberOfPMs = 2;
   public solutions = undefined;
+  public chartData = { data: [], labels: ['Average', 'Multiplication'] };
 
-  constructor(public _tiersService: TiersService, private toastr: ToastrService) { }
+  constructor(
+    public _tiersService: TiersService,
+    private toastr: ToastrService
+  ) {}
 
   /**
    * Generate a round robin placement
@@ -108,7 +112,21 @@ export class PlacementService {
     });
 
     this.solutions = solutions;
+    this.generateChartData();
+
+    this.toastr.success(
+      'All placement comparations were successfully generated.',
+      'Success'
+    );
   }
 
-
+  generateChartData() {
+    this.chartData.data = [];
+    for (const solution of this.solutions) {
+      this.chartData.data.push({
+        data: [solution.solution.getCostAVG().toFixed(2), solution.solution.getCost().toFixed(2)],
+        label: solution.algorithm
+      });
+    }
+  }
 }
