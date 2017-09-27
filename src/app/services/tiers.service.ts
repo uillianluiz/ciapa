@@ -49,7 +49,7 @@ export class TiersService {
   }
 
   constructor(private toastr: ToastrService) {
-   this.load();
+    this.load(false);
   }
 
   addAffinity(tierId: number): void {
@@ -59,15 +59,15 @@ export class TiersService {
   }
 
   newTier(): void {
-    this.tiers.unshift(
-      new Tier(this.interference(), this.affinity(), this.capacity())
-    );
+    const tier = new Tier(this.interference(), this.affinity(), this.capacity());
+    tier.name = 'tier' + (this.tiers.length + 1);
+    this.tiers.unshift(tier);
   }
 
   newRandomTier(): void {
-    this.tiers.unshift(
-      new Tier(this.interference(true), this.affinity(), this.capacity(true))
-    );
+    const tier = new Tier(this.interference(true), this.affinity(), this.capacity(true));
+    tier.name = 'tier' + (this.tiers.length + 1);
+    this.tiers.unshift(tier);
   }
 
   /**
@@ -82,15 +82,19 @@ export class TiersService {
     );
   }
 
-  load(): void {
+  load(showAlert = true): void {
     if (localStorage.getItem('tiers') == null) {
-      this.toastr.error('There are no tier locally saved.', 'Error');
+      if (showAlert) {
+        this.toastr.error('There are no tier locally saved.', 'Error');
+      }
     } else {
       this.tiers = CircularJSON.parse(localStorage.getItem('tiers'));
-      this.toastr.success(
-        'Tiers were successfully loaded from your local storage.',
-        'Success'
-      );
+      if (showAlert) {
+        this.toastr.success(
+          'Tiers were successfully loaded from your local storage.',
+          'Success'
+        );
+      }
     }
   }
 }
