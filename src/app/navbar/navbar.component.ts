@@ -14,6 +14,7 @@ import { PlacementService } from '../services/placement.service';
 export class NavbarComponent implements OnInit {
 
   public subnavStick = false;
+  public costFunction = 'getCost';
 
   constructor(
     private _tiersService: TiersService,
@@ -40,7 +41,7 @@ export class NavbarComponent implements OnInit {
   }
 
   executeSA(): void {
-    this._placementService.execute();
+    this._placementService.execute(this.costFunction);
   }
 
   save(): void {

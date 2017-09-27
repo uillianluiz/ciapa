@@ -34,9 +34,9 @@ export class PlacementService {
   /**
    * Generate a placement based on the simulated annealing algorithm
    */
-  executeSA(): Solution {
+  executeSA(costFunction: string): Solution {
     const simulatedAnnealing = new SimulatedAnnealing();
-    return simulatedAnnealing.exec(this.executeRR());
+    return simulatedAnnealing.exec(this.executeRR(), costFunction);
   }
 
   /**
@@ -53,7 +53,7 @@ export class PlacementService {
   /**
    * Execute all placement algorithms available
    */
-  execute() {
+  execute(costFunction: string) {
     this.ensurePMNumber();
 
     this.solutions = undefined;
@@ -61,7 +61,7 @@ export class PlacementService {
 
     solutions.push({
       algorithm: 'Simulated Annealing',
-      solution: this.executeSA()
+      solution: this.executeSA(costFunction)
     });
 
     solutions.push({

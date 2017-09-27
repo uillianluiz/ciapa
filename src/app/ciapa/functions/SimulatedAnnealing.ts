@@ -27,7 +27,7 @@ class SimulatedAnnealing {
      * @param initial initial solution
      * @return best solution found
      */
-  exec(initial: Solution): Solution {
+  exec(initial: Solution, costFunction = 'getCost'): Solution {
     let best = initial;
     let temperature = this.temperature;
     let currentSolution = Solution.copy(best);
@@ -37,14 +37,17 @@ class SimulatedAnnealing {
     let noChange = 0;
     const maxNoChange = 1000;
 
+    console.log('Using costFunction: ');
+    console.log(best[costFunction]);
+
     while (temperature > 1 && noChange < maxNoChange) {
       numOp++;
       const newSolution = Solution.copy(currentSolution);
 
       newSolution.randomSwap(); // generate a modified solution
 
-      const currentCost = currentSolution.getCost();
-      const newCost = newSolution.getCost();
+      const currentCost = currentSolution[costFunction]();
+      const newCost = newSolution[costFunction]();
 
       if (
         this.acceptanceProbability(currentCost, newCost, temperature) >
@@ -53,14 +56,14 @@ class SimulatedAnnealing {
         currentSolution = newSolution;
       }
 
-      if (currentSolution.getCost() < best.getCost()) {
+      if (currentSolution[costFunction]() < best[costFunction]()) {
         best = currentSolution;
         noChange = 0;
       }
       noChange++;
       temperature *= 1 - this.coolingRate;
     }
-    console.log('NumOp: ' + numOp);
+    // console.log('NumOp: ' + numOp);
     return best;
   }
 }

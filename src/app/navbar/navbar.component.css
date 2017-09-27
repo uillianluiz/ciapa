@@ -10,7 +10,7 @@ button{
 }
 
 .numberOfPMs {
-  width: 8px;
+    width: 60px;
 }
 
 .subnavStick {
@@ -18,4 +18,8 @@ button{
     top: 0;
     width: 100%;
     z-index:10;
+}
+
+.select select {
+    width: 120px;
 }
