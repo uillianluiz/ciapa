@@ -39,4 +39,4 @@ class HillClimbing {
   }
 }
 
-export { SimulatedAnnealing };
+export { HillClimbing };

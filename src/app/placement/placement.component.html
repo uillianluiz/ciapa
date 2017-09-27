@@ -20,11 +20,17 @@
                 Cost functions:
                 <span class="label label-orange"> 
                     {{solution.solution.getCost().toFixed(3)}}
-                    <span class="badge">M</span>
+                    <span class="badge tooltip tooltip-sm" role="tooltip">
+                      M
+                      <span class="tooltip-content">Multiplication</span>
+                    </span>
                   </span>
                   <span class="label label-orange"> 
                       {{solution.solution.getCostAVG().toFixed(3)}}
-                      <span class="badge">A</span>
+                      <span class="badge tooltip tooltip-sm" role="tooltip">
+                        A
+                        <span class="tooltip-content">Average</span>
+                      </span>
                     </span>
               </clr-stack-header>
               <clr-stack-block [clrSbExpanded]="false" *ngFor="let pm of solution.solution.PMs">
