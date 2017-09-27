@@ -32,6 +32,34 @@ export class PlacementService {
   }
 
   /**
+   * Execute a first fit placement
+   */
+  private executeFF(): Solution {
+    const solution: Solution = new Solution();
+
+    let numPMs = 1;
+
+    for (const tier of this._tiersService.tiers) {
+      let hasAdded = false;
+      for (const pm of solution.PMs) {
+        if (pm.getCapacity() + tier.capacity.capacity <= 1) {
+          pm.tiers.push(tier);
+          hasAdded = true;
+          break;
+        }
+      }
+      if (!hasAdded) {
+        const newPM = new PM();
+        newPM.name = `PM${numPMs++}`;
+        newPM.tiers.push(tier);
+        solution.PMs.push(newPM);
+      }
+    }
+
+    return solution;
+  }
+
+  /**
    * Generate a placement based on the simulated annealing algorithm
    */
   executeSA(costFunction: string): Solution {
@@ -69,8 +97,13 @@ export class PlacementService {
       solution: this.executeRR()
     });
 
+    solutions.push({
+      algorithm: 'First Fit',
+      solution: this.executeFF()
+    });
+
     this.solutions = solutions;
   }
 
-  
+
 }
