@@ -4,13 +4,14 @@ import { Model } from '../ciapa/functions/Model';
 import { SimulatedAnnealing } from '../ciapa/functions/SimulatedAnnealing';
 import { TiersService } from './tiers.service';
 import { PM } from '../ciapa/datatype/PM';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class PlacementService {
   public numberOfPMs = 2;
   public solutions = undefined;
 
-  constructor(public _tiersService: TiersService) { }
+  constructor(public _tiersService: TiersService, private toastr: ToastrService) { }
 
   /**
    * Generate a round robin placement
@@ -82,6 +83,10 @@ export class PlacementService {
    * Execute all placement algorithms available
    */
   execute(costFunction: string) {
+    if (this._tiersService.tiers.length === 0) {
+      this.toastr.error('There are no tiers to place.', 'Error');
+      return;
+    }
     this.ensurePMNumber();
 
     this.solutions = undefined;

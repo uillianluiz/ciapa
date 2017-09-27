@@ -19,6 +19,10 @@ import Util from '../ciapa/functions/Util';
 export class TiersService {
   public tiers: Tier[] = [];
 
+  constructor(private toastr: ToastrService) {
+    this.load(false);
+  }
+
   private interference(random = false): Interference {
     if (random) {
       const opt = ['Absent', 'Low', 'Moderate', 'High'];
@@ -46,10 +50,6 @@ export class TiersService {
       return new Capacity(Capacity.sizes[Util.getRandomInt(0, Capacity.sizes.length)].capacity);
     }
     return new Capacity(0.05);
-  }
-
-  constructor(private toastr: ToastrService) {
-    this.load(false);
   }
 
   addAffinity(tierId: number): void {
@@ -85,7 +85,7 @@ export class TiersService {
   load(showAlert = true): void {
     if (localStorage.getItem('tiers') == null) {
       if (showAlert) {
-        this.toastr.error('There are no tier locally saved.', 'Error');
+        this.toastr.error('There are no tiers locally saved.', 'Error');
       }
     } else {
       this.tiers = CircularJSON.parse(localStorage.getItem('tiers'));
