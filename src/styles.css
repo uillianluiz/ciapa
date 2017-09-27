@@ -3,6 +3,10 @@ body {
   background-color: #fafafa;
 }
 
+.main-container .content-container .content-area {
+	overflow-x: hidden;
+}
+
 .pre-bootstrap {
   position: absolute;
   left: calc(50% - 30px);

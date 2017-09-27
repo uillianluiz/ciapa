@@ -19,9 +19,6 @@ import Util from '../ciapa/functions/Util';
 export class TiersService {
   public tiers: Tier[] = [];
 
-
-
-
   private interference(random = false): Interference {
     if (random) {
       const opt = ['Absent', 'Low', 'Moderate', 'High'];
@@ -44,7 +41,10 @@ export class TiersService {
     return new Affinity();
   }
 
-  private capacity(): Capacity {
+  private capacity(random = false): Capacity {
+    if (random) {
+      return new Capacity(Capacity.sizes[Util.getRandomInt(0, Capacity.sizes.length)].capacity);
+    }
     return new Capacity(0.05);
   }
 
@@ -58,7 +58,7 @@ export class TiersService {
     const tier3Affinity = new Affinity();
     const tier3Capacity = new Capacity(0.4);
     const tier3 = new Tier(tier3Interference, tier3Affinity, tier3Capacity);
-    tier3.name = 'tier3';
+    tier3.name = 'tier1';
     this.tiers.push(tier3);
 
     const tier2Interference = new Interference(
@@ -91,7 +91,7 @@ export class TiersService {
 
   newRandomTier(): void {
     this.tiers.unshift(
-      new Tier(this.interference(true), this.affinity(), this.capacity())
+      new Tier(this.interference(true), this.affinity(), this.capacity(true))
     );
   }
 
