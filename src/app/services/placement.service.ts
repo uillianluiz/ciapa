@@ -10,8 +10,11 @@ export class PlacementService {
   public numberOfPMs = 2;
   public solutions = undefined;
 
-  constructor(public _tiersService: TiersService) {}
+  constructor(public _tiersService: TiersService) { }
 
+  /**
+   * Generate a round robin placement
+   */
   private executeRR(): Solution {
     const initialSolution: Solution = new Solution();
     for (let i = 0; i < this.numberOfPMs; i++) {
@@ -28,10 +31,30 @@ export class PlacementService {
     return initialSolution;
   }
 
-  execute() {
+  /**
+   * Generate a placement based on the simulated annealing algorithm
+   */
+  executeSA(): Solution {
+    const simulatedAnnealing = new SimulatedAnnealing();
+    return simulatedAnnealing.exec(this.executeRR());
+  }
+
+  /**
+   * Ensure the limits of PMs that can be used
+   */
+  ensurePMNumber(): void {
     if (this.numberOfPMs > this._tiersService.tiers.length) {
       this.numberOfPMs = this._tiersService.tiers.length;
+    } else if (this.numberOfPMs <= 1) {
+      this.numberOfPMs = 1;
     }
+  }
+
+  /**
+   * Execute all placement algorithms available
+   */
+  execute() {
+    this.ensurePMNumber();
 
     this.solutions = undefined;
     const solutions = [];
@@ -49,8 +72,5 @@ export class PlacementService {
     this.solutions = solutions;
   }
 
-  executeSA(): Solution {
-    const simulatedAnnealing = new SimulatedAnnealing();
-    return simulatedAnnealing.exec(this.executeRR());
-  }
+  
 }

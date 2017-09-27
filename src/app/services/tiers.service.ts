@@ -58,7 +58,7 @@ export class TiersService {
     const tier3Affinity = new Affinity();
     const tier3Capacity = new Capacity(0.4);
     const tier3 = new Tier(tier3Interference, tier3Affinity, tier3Capacity);
-    tier3.name = 'tier1';
+    tier3.name = 'tier2';
     this.tiers.push(tier3);
 
     const tier2Interference = new Interference(
@@ -73,7 +73,7 @@ export class TiersService {
     );
     const tier2Capacity = new Capacity(0.3);
     const tier2 = new Tier(tier2Interference, tier2Affinity, tier2Capacity);
-    tier2.name = 'tier2';
+    tier2.name = 'tier1';
     this.tiers.push(tier2);
   }
 
