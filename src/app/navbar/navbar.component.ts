@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 
 import 'clarity-icons';
 import 'clarity-icons/shapes/all-shapes';
@@ -12,13 +12,24 @@ import { PlacementService } from '../services/placement.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+
+  public subnavStick = false;
+
   constructor(
     private _tiersService: TiersService,
     public router: Router,
     public _placementService: PlacementService
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
+
+  @HostListener('window:scroll', ['$event']) onScrollEvent($event) {
+    if (window.pageYOffset >= 60) {
+      this.subnavStick = true;
+    } else {
+      this.subnavStick = false;
+    }
+  }
 
   newTier(): void {
     this._tiersService.newTier();

@@ -13,7 +13,7 @@
 
   </div>
 </header>
-<nav class="subnav" *ngIf="router.url === '/tiers'">
+<nav class="subnav" *ngIf="router.url === '/tiers'" [class.subnavStick]="subnavStick">
   <ul class="nav">
     <li class="nav-item">
       <a class="nav-link" href="javascript://" (click)="save()">Save</a>
@@ -33,7 +33,7 @@
   </ul>
 </nav>
 
-<nav class="subnav" *ngIf="router.url === '/placement'">
+<nav class="subnav" *ngIf="router.url === '/placement'" [class.subnavStick]="subnavStick">
   <ul class="nav">
     <li class="nav-item">
       Number of PMs: <input type="number" min="0" max="1000" [(ngModel)]="_placementService.numberOfPMs" class="numberOfPMs">

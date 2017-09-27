@@ -12,3 +12,10 @@ button{
 .numberOfPMs {
   width: 8px;
 }
+
+.subnavStick {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index:10;
+}
