@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Tier } from '../util/datatype/Tier';
-import { Affinity, AffinityElement } from '../util/datatype/Affinity';
-import { Capacity } from '../util/datatype/Capacity';
-import { Interference } from '../util/datatype/Interference';
+import { Tier } from '../ciapa/datatype/Tier';
+import { Affinity, AffinityElement } from '../ciapa/datatype/Affinity';
+import { Capacity } from '../ciapa/datatype/Capacity';
+import { Interference } from '../ciapa/datatype/Interference';
 import {
   DegradationCPU,
   DegradationMemory,
   DegradationAffinity,
   DegradationCache,
   DegradationDisk
-} from '../util/datatype/Degradation';
+} from '../ciapa/datatype/Degradation';
 import { TiersService } from '../services/tiers.service';
 
 @Component({

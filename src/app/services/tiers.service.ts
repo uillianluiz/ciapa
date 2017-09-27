@@ -1,38 +1,35 @@
 import { Injectable } from '@angular/core';
-import { Tier } from '../util/datatype/Tier';
-import { Interference } from '../util/datatype/Interference';
+import { Tier } from '../ciapa/datatype/Tier';
+import { Interference } from '../ciapa/datatype/Interference';
 import {
   DegradationCPU,
   DegradationDisk,
   DegradationCache,
   DegradationMemory,
   DegradationAffinity
-} from '../util/datatype/Degradation';
-import { Affinity, AffinityElement } from '../util/datatype/Affinity';
-import { Capacity } from '../util/datatype/Capacity';
+} from '../ciapa/datatype/Degradation';
+import { Affinity, AffinityElement } from '../ciapa/datatype/Affinity';
+import { Capacity } from '../ciapa/datatype/Capacity';
 
 import * as CircularJSON from 'circular-json';
 import { ToastrService } from 'ngx-toastr';
+import Util from '../ciapa/functions/Util';
 
 @Injectable()
 export class TiersService {
   public tiers: Tier[] = [];
 
-  private getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min)) + min; // The maximum is exclusive and the minimum is inclusive
-  }
+
 
 
   private interference(random = false): Interference {
     if (random) {
       const opt = ['Absent', 'Low', 'Moderate', 'High'];
       return new Interference(
-        DegradationCPU[opt[this.getRandomInt(0, 4)]],
-        DegradationMemory[opt[this.getRandomInt(0, 4)]],
-        DegradationDisk[opt[this.getRandomInt(0, 4)]],
-        DegradationCache[opt[this.getRandomInt(0, 4)]],
+        DegradationCPU[opt[Util.getRandomInt(0, 4)]],
+        DegradationMemory[opt[Util.getRandomInt(0, 4)]],
+        DegradationDisk[opt[Util.getRandomInt(0, 4)]],
+        DegradationCache[opt[Util.getRandomInt(0, 4)]],
       );
     }
     return new Interference(

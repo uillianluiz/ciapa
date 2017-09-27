@@ -1,6 +1,7 @@
 import { PM } from './PM';
 import { Tier } from './Tier';
 import * as CircularJSON from 'circular-json';
+import Util from '../functions/Util';
 
 
 class Solution {
@@ -37,17 +38,6 @@ class Solution {
   }
 
   /**
-     * Returns an integer between the given range
-     * @param min minimum value (inclusive)
-     * @param max maximum value (exclusive)
-     */
-  private getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min)) + min; // The maximum is exclusive and the minimum is inclusive
-  }
-
-  /**
      * Generate a random modification of the current solution.
      * 75% of chance of swaping two tiers
      * 25% of change of moving a tier to a new PM
@@ -78,7 +68,7 @@ class Solution {
       }
     }
 
-    const tier = this.getRandomInt(0, maxPM.tiers.length);
+    const tier = Util.getRandomInt(0, maxPM.tiers.length);
 
     const t1 = maxPM.tiers[tier];
     maxPM.tiers.splice(tier, 1);
@@ -92,14 +82,14 @@ class Solution {
      * Swap two random tiers from two different PMs
      */
   private swap() {
-    const pm1 = this.getRandomInt(0, this.PMs.length);
+    const pm1 = Util.getRandomInt(0, this.PMs.length);
     let pm2 = pm1;
     while (pm2 === pm1) {
-      pm2 = this.getRandomInt(0, this.PMs.length);
+      pm2 = Util.getRandomInt(0, this.PMs.length);
     }
 
-    const tier1 = this.getRandomInt(0, this.PMs[pm1].tiers.length);
-    const tier2 = this.getRandomInt(0, this.PMs[pm2].tiers.length);
+    const tier1 = Util.getRandomInt(0, this.PMs[pm1].tiers.length);
+    const tier2 = Util.getRandomInt(0, this.PMs[pm2].tiers.length);
 
     // console.log(`Swaping ${this.PMs[pm1].tiers[tier1].name} -> ${this.PMs[pm2].tiers[tier2].name}`)
 

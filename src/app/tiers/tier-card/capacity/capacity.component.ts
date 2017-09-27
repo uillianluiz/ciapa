@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Capacity } from '../../../util/datatype/Capacity';
+import { Capacity } from '../../../ciapa/datatype/Capacity';
 
 @Component({
   selector: 'app-capacity',

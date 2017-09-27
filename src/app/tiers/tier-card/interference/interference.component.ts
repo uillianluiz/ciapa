@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Interference } from '../../../util/datatype/Interference';
+import { Interference } from '../../../ciapa/datatype/Interference';
 
 @Component({
   selector: 'app-interference',

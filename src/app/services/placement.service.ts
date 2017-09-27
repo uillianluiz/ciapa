@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Solution } from '../util/datatype/Solution';
-import { Model } from '../util/functions/Model';
-import { SimulatedAnnealing } from '../util/functions/SimulatedAnnealing';
+import { Solution } from '../ciapa/datatype/Solution';
+import { Model } from '../ciapa/functions/Model';
+import { SimulatedAnnealing } from '../ciapa/functions/SimulatedAnnealing';
 import { TiersService } from './tiers.service';
-import { PM } from '../util/datatype/PM';
+import { PM } from '../ciapa/datatype/PM';
 
 @Injectable()
 export class PlacementService {

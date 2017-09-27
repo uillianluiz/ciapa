@@ -5,8 +5,8 @@ import {
   DegradationAffinity,
   DegradationCache,
   DegradationDisk
-} from '../../util/datatype/Degradation';
-import { Tier } from '../../util/datatype/Tier';
+} from '../../ciapa/datatype/Degradation';
+import { Tier } from '../../ciapa/datatype/Tier';
 import { TiersService } from '../../services/tiers.service';
 
 @Component({

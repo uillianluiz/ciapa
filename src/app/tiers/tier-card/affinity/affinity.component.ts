@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { TiersService } from '../../../services/tiers.service';
-import { Tier } from '../../../util/datatype/Tier';
-import { AffinityElement, Affinity } from '../../../util/datatype/Affinity';
+import { Tier } from '../../../ciapa/datatype/Tier';
+import { AffinityElement, Affinity } from '../../../ciapa/datatype/Affinity';
 
 @Component({
   selector: 'app-affinity',
