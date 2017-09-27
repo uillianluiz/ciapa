@@ -7,12 +7,7 @@
     <div class="col-xs-8">
       <div class="select">
         <select id="size" [(ngModel)]="capacity.capacity">
-            <option [ngValue]="0.05">Nano 0.05%</option>
-            <option [ngValue]="0.10">Micro 0.10%</option>
-            <option [ngValue]="0.15">Small 0.15%</option>
-            <option [ngValue]="0.20">Medium 0.20%</option>
-            <option [ngValue]="0.30">Large 0.30%</option>
-            <option [ngValue]="0.40">Xlarge 0.40%</option>
+            <option *ngFor="let size of sizes" [ngValue]="size.capacity">{{size.name}} {{size.capacity*100}}%</option>
           </select>
       </div>
     </div>

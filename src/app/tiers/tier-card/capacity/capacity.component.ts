@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Capacity } from '../../../util/datatype/Capacity';
 
 @Component({
   selector: 'app-capacity',
@@ -11,6 +12,10 @@ export class CapacityComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  get sizes() {
+    return Capacity.sizes;
   }
 
 }
