@@ -16,6 +16,8 @@ import { TierCardComponent } from './tiers/tier-card/tier-card.component';
 import { TiersComponent } from './tiers/tiers.component';
 import { TiersService } from './services/tiers.service';
 import { ToastrModule } from 'ngx-toastr';
+import { SettingsComponent } from './placement/settings/settings.component';
+import { ResultsComponent } from './placement/results/results.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { ToastrModule } from 'ngx-toastr';
     InterferenceComponent,
     CapacityComponent,
     AffinityComponent,
-    PlacementComponent
+    PlacementComponent,
+    SettingsComponent,
+    ResultsComponent
   ],
   imports: [
     RoutingModule,

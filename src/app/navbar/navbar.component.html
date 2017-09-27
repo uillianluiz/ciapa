@@ -31,22 +31,3 @@
     </li>
   </ul>
 </nav>
-
-<nav class="subnav" *ngIf="router.url === '/placement'" [class.subnavStick]="subnavStick">
-  <ul class="nav">
-    <li class="nav-item">
-      Number of PMs: <input type="number" min="0" max="1000" [(ngModel)]="_placementService.numberOfPMs" class="numberOfPMs">
-    </li>
-    <li class="nav-item">
-      <div class="select">Cost:
-        <select [(ngModel)]="costFunction">
-            <option ngValue="getCost">Multiplication</option>
-            <option ngValue="getCostAVG">Average</option>
-        </select>
-      </div>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="javascript://" (click)="executeSA()">Execute</a>
-    </li>
-  </ul>
-</nav>

@@ -14,7 +14,6 @@ import { PlacementService } from '../services/placement.service';
 export class NavbarComponent implements OnInit {
 
   public subnavStick = false;
-  public costFunction = 'getCost';
 
   constructor(
     private _tiersService: TiersService,
@@ -38,10 +37,6 @@ export class NavbarComponent implements OnInit {
 
   newRandomTier(): void {
     this._tiersService.newRandomTier();
-  }
-
-  executeSA(): void {
-    this._placementService.execute(this.costFunction);
   }
 
   save(): void {
