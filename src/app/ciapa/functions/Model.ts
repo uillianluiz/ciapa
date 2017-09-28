@@ -3,8 +3,6 @@ import { Interference } from '../datatype/Interference';
 import { Affinity } from '../datatype/Affinity';
 import { Capacity } from '../datatype/Capacity';
 
-
-
 class Model {
 
     private MAX = 100;
@@ -14,7 +12,7 @@ class Model {
      * @param tiers array of tiers placed in the same PM
      * @return total placement cost of the given tiers
      */
-    cost(tiers: Tier[]) {
+    cost(tiers: Tier[], pmCapacity: number) {
         const interferences: Interference[] = [];
         const affinities: Affinity[] = [];
         const capacities: Capacity[] = [];
@@ -23,26 +21,26 @@ class Model {
             affinities.push(tier.affinity);
             capacities.push(tier.capacity);
         }
-        return this.costInterference(interferences) * this.costAffinity(affinities, tiers) * this.costCapacity(capacities);
+        return this.costInterference(interferences) * this.costAffinity(affinities, tiers) * this.costCapacity(capacities, pmCapacity);
     }
 
-    /**
+    /** 
      * Calculates the cost given by the interference of each resource
      * @param interferences array of interferences
      * @return total interference cost
      */
     costInterference(interferences: Interference[]) {
-        let costInterferenceAux = function (type: string) {
+        const costInterferenceAux = function (type: string) {
             let cost = 1;
             let count = 0;
-            for (let interference of interferences) {
+            for (const interference of interferences) {
                 if (interference[type] > 1) {
                     cost *= interference[type];
                     count++;
                 }
             }
             return count > 1 ? cost : 1;
-        }
+        };
 
         return costInterferenceAux('cpu') * costInterferenceAux('memory') * costInterferenceAux('disk') * costInterferenceAux('cache');
     }
@@ -55,9 +53,9 @@ class Model {
      */
     costAffinity(affinities: Affinity[], tiers: Tier[]) {
         let cost = 1;
-        for (let affinity of affinities) {
-            for (let affinityElement of affinity.affinities) {
-                cost *= tiers.indexOf(affinityElement.tier) == -1 ? affinityElement.affinity : 1;
+        for (const affinity of affinities) {
+            for (const affinityElement of affinity.affinities) {
+                cost *= tiers.indexOf(affinityElement.tier) === -1 ? affinityElement.affinity : 1;
             }
         }
         return cost;
@@ -68,13 +66,13 @@ class Model {
      * @param capacities array of size of each tier
      * @return capacity constraint cost
      */
-    costCapacity(capacities: Capacity[]) {
+    costCapacity(capacities: Capacity[], pmCapacity: number) {
         let sum = 0;
-        for (let capacity of capacities) {
+        for (const capacity of capacities) {
             sum += capacity.capacity;
         }
-        return sum > 1 ? this.MAX : 1;
+        return sum > pmCapacity ? this.MAX : 1;
     }
 }
 
-export { Model }
+export { Model };

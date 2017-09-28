@@ -33,7 +33,7 @@ class PM {
      */
   public getCost(): number {
     if (this.cost === undefined || this.hasChanged) {
-      this.cost = PM.model.cost(this.tiers);
+      this.cost = PM.model.cost(this.tiers, this.capacity);
       this.hasChanged = false;
     }
     return this.cost;
