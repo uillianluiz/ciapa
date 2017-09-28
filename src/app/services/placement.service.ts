@@ -9,10 +9,10 @@ import { ToastrService } from 'ngx-toastr';
 import { FirstFit } from '../ciapa/functions/FirstFit';
 import { PmsService } from './pms.service';
 import * as CircularJSON from 'circular-json';
+import { Tier } from '../ciapa/datatype/Tier';
 
 @Injectable()
 export class PlacementService {
-  public numberOfPMs = 2;
   public solutions = undefined;
   public chartData = { data: [], labels: ['Average', 'Multiplication'] };
 
@@ -36,12 +36,22 @@ export class PlacementService {
     return pms;
   }
 
+  get tiers(): Tier[]{
+    const tiers = <Tier[]>Object.assign(
+      CircularJSON.parse(CircularJSON.stringify(this._tiersService.tiers))
+    );
+    tiers.sort(function(a, b) {
+      return b.capacity.capacity - a.capacity.capacity;
+    });
+    return tiers;
+  }
+
   /**
    * Generate a round robin placement
    */
   private executeRR(): Solution {
     const roundRobin = new RoundRobin();
-    return roundRobin.exec(this.pms, this._tiersService.tiers);
+    return roundRobin.exec(this.pms, this.tiers);
   }
 
   /**
@@ -49,7 +59,7 @@ export class PlacementService {
    */
   private executeFF(): Solution {
     const firstFit = new FirstFit();
-    return firstFit.exec(this.pms, this._tiersService.tiers);
+    return firstFit.exec(this.pms, this.tiers);
   }
 
   /**
@@ -58,17 +68,6 @@ export class PlacementService {
   executeSA(costFunction: string): Solution {
     const simulatedAnnealing = new SimulatedAnnealing();
     return simulatedAnnealing.exec(this.executeRR(), costFunction);
-  }
-
-  /**
-   * Ensure the limits of PMs that can be used
-   */
-  ensurePMNumber(): void {
-    if (this.numberOfPMs > this._tiersService.tiers.length) {
-      this.numberOfPMs = this._tiersService.tiers.length;
-    } else if (this.numberOfPMs <= 1) {
-      this.numberOfPMs = 1;
-    }
   }
 
   /**
@@ -82,7 +81,6 @@ export class PlacementService {
       this.toastr.error('There should be at least one PM.', 'Error');
       return;
     }
-    this.ensurePMNumber();
 
     this.solutions = [];
 
@@ -97,7 +95,7 @@ export class PlacementService {
     });
 
     this.solutions.push({
-      algorithm: 'First Fit',
+      algorithm: 'First Fit Decreasing',
       solution: this.executeFF()
     });
     this.generateChartData();
