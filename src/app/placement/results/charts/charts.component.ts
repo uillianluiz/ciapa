@@ -13,6 +13,8 @@ export class ChartsComponent implements OnInit {
     maintainAspectRatio: true
   };
 
+  public barToggle = true;
+
   public barChartType = 'bar';
   public barChartLegend = true;
 
@@ -26,5 +28,13 @@ export class ChartsComponent implements OnInit {
 
   get data() {
     return this._placementService.chartData.data;
+  }
+
+  handleToggle() {
+    if (this.barToggle) {
+      this.barChartType = 'bar';
+    } else {
+      this.barChartType = 'horizontalBar';
+    }
   }
 }
