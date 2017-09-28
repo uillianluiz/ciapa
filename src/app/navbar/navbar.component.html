@@ -6,9 +6,18 @@
     </div>
   </div>
   <div class="header-nav">
-    <a routerLink="/tiers" class="nav-link nav-text" [class.active]="router.url === '/tiers'">Tiers</a>
-    <a routerLink="/pms" class="nav-link nav-text" [class.active]="router.url === '/pms'">PMs</a>
-    <a routerLink="/placement" class="nav-link nav-text" [class.active]="router.url === '/placement'">Placement</a>
+    <a routerLink="/tiers" class="nav-link nav-text" [class.active]="router.url === '/tiers'">
+      <span class="hidden-xs-down">Tiers</span>
+      <span class="hidden-sm-up"><clr-icon shape="vmw-app"></clr-icon></span>
+    </a>
+    <a routerLink="/pms" class="nav-link nav-text" [class.active]="router.url === '/pms'">
+      <span class="hidden-xs-down">PMs</span>
+      <span class="hidden-sm-up"><clr-icon shape="host"></clr-icon></span>
+    </a>
+    <a routerLink="/placement" class="nav-link nav-text" [class.active]="router.url === '/placement'">
+      <span class="hidden-xs-down">Placement</span>
+      <span class="hidden-sm-up"><clr-icon shape="plugin"></clr-icon></span>
+    </a>
   </div>
   <div class="header-actions">
   </div>

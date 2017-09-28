@@ -15,6 +15,8 @@ import { Tier } from '../ciapa/datatype/Tier';
 export class PlacementService {
   public solutions = undefined;
   public chartData = { dataAVG: [], dataMult: [] };
+  public costThreshold = 10;
+  public sizeNewPMs = 1;
 
   constructor(
     public _tiersService: TiersService,
@@ -59,7 +61,7 @@ export class PlacementService {
    */
   private executeFF(): Solution {
     const firstFit = new FirstFit();
-    return firstFit.exec(this.pms, this.tiers);
+    return firstFit.exec(this.pms, this.tiers, this.costThreshold, this.sizeNewPMs);
   }
 
   /**

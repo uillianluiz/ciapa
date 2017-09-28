@@ -3,10 +3,10 @@ import { PM } from '../datatype/PM';
 import { Tier } from '../datatype/Tier';
 
 /**
- * Place the tiers in a first fit fashion, checking the PMs capacity and cost threshold, and adding more PMs as necessary
+ * Place the tiers in a best fit fashion, checking only the PMs capacity, and adding more PMs as necessary
  */
-class FirstFit {
-  public exec(pms: PM[], tiers: Tier[], costThreshold: number, sizeNewPMs: number): Solution {
+class BestFit {
+  public exec(pms: PM[], tiers: Tier[]): Solution {
     const solution: Solution = new Solution();
     solution.PMs = pms;
 
@@ -15,18 +15,13 @@ class FirstFit {
       for (const pm of solution.PMs) {
         if (pm.getCapacityUsed() + tier.capacity.capacity <= pm.capacity) {
           pm.tiers.push(tier);
-          if (pm.getCost() > costThreshold) {
-            pm.tiers.pop();
-          } else {
-            hasAdded = true;
-            break;
-          }
+          hasAdded = true;
+          break;
         }
       }
       if (!hasAdded) {
         const newPM = new PM();
         newPM.name = `+PM${solution.PMs.length + 1}`;
-        newPM.capacity = sizeNewPMs;
         newPM.tiers.push(tier);
         solution.PMs.push(newPM);
       }
@@ -36,4 +31,4 @@ class FirstFit {
   }
 }
 
-export { FirstFit };
+export { BestFit };
