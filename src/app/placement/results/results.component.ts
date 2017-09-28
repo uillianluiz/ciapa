@@ -7,17 +7,27 @@ import { PlacementService } from '../../services/placement.service';
   styleUrls: ['./results.component.scss']
 })
 export class ResultsComponent implements OnInit {
-  public isOverflow = window.innerWidth < 680;
-  constructor(public _placementService: PlacementService) {}
 
-  ngOnInit() {}
+  public limitShort = 740;
+  public limitOverflow = 500;
+
+  public isOverflow = window.innerWidth < this.limitOverflow;
+  public showShort = window.innerHeight < this.limitShort;
+  constructor(public _placementService: PlacementService) { }
+
+  ngOnInit() { }
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
-    if (event.target.innerWidth < 680) {
+    if (event.target.innerWidth < this.limitOverflow) {
+      this.showShort = false;
       this.isOverflow = true;
+    } else if (event.target.innerWidth < this.limitShort) {
+      this.showShort = true;
+      this.isOverflow = false;
     } else {
       this.isOverflow = false;
+      this.showShort = false;
     }
   }
 }
