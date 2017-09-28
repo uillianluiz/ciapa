@@ -20,6 +20,10 @@ import { SettingsComponent } from './placement/settings/settings.component';
 import { ResultsComponent } from './placement/results/results.component';
 import { ChartsModule } from 'ng2-charts';
 import { ChartsComponent } from './placement/results/charts/charts.component';
+import { PmsComponent } from './pms/pms.component';
+import { PmsService } from './services/pms.service';
+import { PmCardComponent } from './pms/pm-card/pm-card.component';
+
 
 @NgModule({
   declarations: [
@@ -33,7 +37,9 @@ import { ChartsComponent } from './placement/results/charts/charts.component';
     PlacementComponent,
     SettingsComponent,
     ResultsComponent,
-    ChartsComponent
+    ChartsComponent,
+    PmsComponent,
+    PmCardComponent
   ],
   imports: [
     RoutingModule,
@@ -45,7 +51,7 @@ import { ChartsComponent } from './placement/results/charts/charts.component';
     ToastrModule.forRoot(), // ToastrModule added,
     ChartsModule
   ],
-  providers: [TiersService, PlacementService],
+  providers: [TiersService, PlacementService, PmsService],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

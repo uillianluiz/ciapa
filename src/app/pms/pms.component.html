@@ -1,0 +1,8 @@
+<div class="content-container">
+  <div class="content-area">
+    <div class="row" dnd-sortable-container [dropZones]="['pms']" [sortableData]="pms">
+      <app-pm-card class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3" *ngFor="let pm of pms; let i = index" [pmId]="i"
+        dnd-sortable [sortableIndex]="i"></app-pm-card>
+    </div>
+  </div>
+</div>

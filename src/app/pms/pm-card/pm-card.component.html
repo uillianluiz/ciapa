@@ -1,0 +1,39 @@
+<div class="card">
+  <div class="card-header">
+    <div class="form-group">
+      <label for="name" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-md" [class.invalid]="pm.name == ''">
+            <input type="text" id="name" [(ngModel)]="pm.name" placeholder="Name">
+            <span class="tooltip-content">
+                This field cannot be empty!
+            </span>
+        </label>
+    </div>
+  </div>
+  <div class="card-block">
+    <div class="card-title">
+      Capacity:
+    </div>
+    <div class="card-text">
+      <div class="row">
+        <div class="col-xs-4">Size of PM:</div>
+        <div class="col-xs-8">
+          <input type="number" [(ngModel)]="pm.capacity" step="0.1">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <button class="btn btn-warning-outline" (click)="_deletePMModal = true"><clr-icon shape="trash"></clr-icon> PM</button>
+  </div>
+</div>
+
+<clr-modal [(clrModalOpen)]="_deletePMModal" [clrModalStaticBackdrop]="true" [clrModalClosable]="false">
+  <h3 class="modal-title">Are you sure you want to delete {{pm.name}}?</h3>
+  <div class="modal-body">
+    <p>This action cannot be undone.</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="_deletePMModal = false">Cancel</button>
+    <button type="button" class="btn btn-warning" (click)="deletePMHandler(); _deletePMModal = false"><clr-icon shape="trash"></clr-icon> Delete</button>
+  </div>
+</clr-modal>

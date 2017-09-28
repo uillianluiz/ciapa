@@ -19,8 +19,8 @@ import Util from '../ciapa/functions/Util';
 export class TiersService {
   public tiers: Tier[] = [];
 
-  constructor(private toastr: ToastrService) {
-    this.load(false);
+  constructor() {
+    this.load();
   }
 
   private interference(random = false): Interference {
@@ -76,25 +76,14 @@ export class TiersService {
   save(): void {
     const str = CircularJSON.stringify(this.tiers);
     localStorage.setItem('tiers', str);
-    this.toastr.success(
-      'Tiers were successfully saved in your local storage.',
-      'Success'
-    );
   }
 
-  load(showAlert = true): void {
+  load(): boolean {
     if (localStorage.getItem('tiers') == null) {
-      if (showAlert) {
-        this.toastr.error('There are no tiers locally saved.', 'Error');
-      }
+      return false;
     } else {
       this.tiers = CircularJSON.parse(localStorage.getItem('tiers'));
-      if (showAlert) {
-        this.toastr.success(
-          'Tiers were successfully loaded from your local storage.',
-          'Success'
-        );
-      }
+      return true;
     }
   }
 }

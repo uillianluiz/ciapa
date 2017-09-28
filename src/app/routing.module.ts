@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { TiersComponent } from './tiers/tiers.component';
 import { PlacementComponent } from './placement/placement.component';
+import { PmsComponent } from './pms/pms.component';
 
 const routes: Routes = [
   {
@@ -11,6 +12,7 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   { path: 'tiers', component: TiersComponent },
+  { path: 'pms', component: PmsComponent },
   { path: 'placement', component: PlacementComponent },
   { path: '**', redirectTo: '/404' }
 ];
