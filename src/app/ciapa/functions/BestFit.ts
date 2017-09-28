@@ -3,7 +3,7 @@ import { PM } from '../datatype/PM';
 import { Tier } from '../datatype/Tier';
 
 /**
- * Place the tiers in a best fit fashion, checking only the PMs capacity, and adding more PMs as necessary
+ * Place the tiers in a best fit fashion, checking the PMs capacity and degradation threshold, and adding more PMs as necessary
  */
 class BestFit {
   public exec(pms: PM[], tiers: Tier[], costThreshold: number, sizeNewPMs: number): Solution {

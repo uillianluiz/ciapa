@@ -151,11 +151,11 @@ export class PlacementService {
     for (const solution of this.solutions) {
       this.chartData.dataAVG.push({
         data: [solution.solution.getCostAVG().toFixed(2)],
-        label: solution.algorithm
+        label: solution.short
       });
       this.chartData.dataMult.push({
         data: [solution.solution.getCost().toFixed(2)],
-        label: solution.algorithm
+        label: solution.short
       });
     }
   }
