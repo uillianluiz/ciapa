@@ -10,8 +10,6 @@ class FirstFit {
     const solution: Solution = new Solution();
     solution.PMs = pms;
 
-    let numPMs = 1;
-
     for (const tier of tiers) {
       let hasAdded = false;
       for (const pm of solution.PMs) {
@@ -23,7 +21,7 @@ class FirstFit {
       }
       if (!hasAdded) {
         const newPM = new PM();
-        newPM.name = `PM${numPMs++}`;
+        newPM.name = `+PM${solution.PMs.length + 1}`;
         newPM.tiers.push(tier);
         solution.PMs.push(newPM);
       }

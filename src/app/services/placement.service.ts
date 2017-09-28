@@ -20,9 +20,11 @@ export class PlacementService {
     public _tiersService: TiersService,
     private _pmsService: PmsService,
     private toastr: ToastrService
-  ) {}
+  ) { }
 
-
+  /**
+   * Create a copy of the PMs (clone)
+   */
   get pms(): PM[] {
     const pms = <PM[]>Object.assign(
       CircularJSON.parse(CircularJSON.stringify(this._pmsService.pms))
@@ -75,6 +77,9 @@ export class PlacementService {
   execute(costFunction: string) {
     if (this._tiersService.tiers.length === 0) {
       this.toastr.error('There are no tiers to place.', 'Error');
+      return;
+    } else if (this._pmsService.pms.length === 0) {
+      this.toastr.error('There should be at least one PM.', 'Error');
       return;
     }
     this.ensurePMNumber();

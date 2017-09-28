@@ -22,4 +22,8 @@ export class PmCardComponent implements OnInit {
     return this._pmsService.pms[this.pmId];
   }
 
+  deletePMHandler(): void {
+    this._pmsService.pms.splice(this.pmId, 1);
+  }
+
 }
