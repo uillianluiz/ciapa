@@ -10,28 +10,36 @@ export class ChartsComponent implements OnInit {
   public barChartOptions: any = {
     scaleShowVerticalLines: false,
     responsive: true,
-    maintainAspectRatio: true
+    maintainAspectRatio: true,
+    title: {
+      display: true,
+      text: 'Cost Comparison'
+  }
   };
 
-  public barToggle = true;
+  public barToggle = false;
+  public dataToogle = true;
 
   public barChartType = 'bar';
   public barChartLegend = true;
+
+  public labelsMult = ['Multiplication'];
+  public labelsAVG = ['Average'];
 
   constructor(public _placementService: PlacementService) {}
 
   ngOnInit() {}
 
-  get labels() {
-    return this._placementService.chartData.labels;
+  get dataAVG() {
+    return this._placementService.chartData.dataAVG;
   }
 
-  get data() {
-    return this._placementService.chartData.data;
+  get dataMult() {
+    return this._placementService.chartData.dataMult;
   }
 
-  handleToggle() {
-    if (this.barToggle) {
+  handleBarToggle() {
+    if (!this.barToggle) {
       this.barChartType = 'bar';
     } else {
       this.barChartType = 'horizontalBar';

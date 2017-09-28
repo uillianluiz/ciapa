@@ -1,13 +1,18 @@
-<div class="offset-md-2 col-md-8">
-  <div style="display: block">
-    <canvas baseChart [datasets]="data" [labels]="labels" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType"></canvas>
-    <div class="footer">
-
-      <div class="toggle-switch">
-        <input type="checkbox" id="barToggle" [(ngModel)]="barToggle" (change)="handleToggle()">
-        <label for="barToggle">Vertical/Horizontal</label>
-      </div>
-
+<div class="row">
+  <div class="col-md-6">
+    <div style="display: block">
+      <canvas baseChart [datasets]="dataAVG" [labels]="labelsAVG" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType"></canvas>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div style="display: block">
+      <canvas baseChart [datasets]="dataMult" [labels]="labelsMult" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType"></canvas>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="toggle-switch">
+      <input type="checkbox" id="barToggle" [(ngModel)]="barToggle" (change)="handleBarToggle()">
+      <label for="barToggle">Vertical/Horizontal</label>
     </div>
   </div>
 </div>

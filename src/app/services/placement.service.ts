@@ -14,7 +14,7 @@ import { Tier } from '../ciapa/datatype/Tier';
 @Injectable()
 export class PlacementService {
   public solutions = undefined;
-  public chartData = { data: [], labels: ['Average', 'Multiplication'] };
+  public chartData = { dataAVG: [], dataMult: [] };
 
   constructor(
     public _tiersService: TiersService,
@@ -86,16 +86,19 @@ export class PlacementService {
 
     this.solutions.push({
       algorithm: 'Simulated Annealing',
+      short: 'SA',
       solution: this.executeSA(costFunction)
     });
 
     this.solutions.push({
       algorithm: 'Round Robin',
+      short: 'RR',
       solution: this.executeRR()
     });
 
     this.solutions.push({
       algorithm: 'First Fit Decreasing',
+      short: 'FFD',
       solution: this.executeFF()
     });
     this.generateChartData();
@@ -110,10 +113,15 @@ export class PlacementService {
    * Generate the data for displaying a chart with the cost functions of each algorithm
    */
   generateChartData() {
-    this.chartData.data = [];
+    this.chartData.dataAVG = [];
+    this.chartData.dataMult = [];
     for (const solution of this.solutions) {
-      this.chartData.data.push({
-        data: [solution.solution.getCostAVG().toFixed(2), solution.solution.getCost().toFixed(2)],
+      this.chartData.dataAVG.push({
+        data: [solution.solution.getCostAVG().toFixed(2)],
+        label: solution.algorithm
+      });
+      this.chartData.dataMult.push({
+        data: [solution.solution.getCost().toFixed(2)],
         label: solution.algorithm
       });
     }
