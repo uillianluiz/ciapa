@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Solution } from '../ciapa/datatype/Solution';
 import { Model } from '../ciapa/functions/Model';
-import { SimulatedAnnealing } from '../ciapa/functions/SimulatedAnnealing';
-import { TiersService } from './tiers.service';
 import { PM } from '../ciapa/datatype/PM';
+import { RoundRobin } from '../ciapa/functions/RoundRobin';
+import { SimulatedAnnealing } from '../ciapa/functions/SimulatedAnnealing';
+import { Solution } from '../ciapa/datatype/Solution';
+import { TiersService } from './tiers.service';
 import { ToastrService } from 'ngx-toastr';
+import { FirstFit } from '../ciapa/functions/FirstFit';
 
 @Injectable()
 export class PlacementService {
@@ -21,47 +23,16 @@ export class PlacementService {
    * Generate a round robin placement
    */
   private executeRR(): Solution {
-    const initialSolution: Solution = new Solution();
-    for (let i = 0; i < this.numberOfPMs; i++) {
-      const pm = new PM();
-      pm.name = `PM${i + 1}`;
-      initialSolution.PMs.push(pm);
-    }
-
-    for (let i = 0; i < this._tiersService.tiers.length; i++) {
-      initialSolution.PMs[i % this.numberOfPMs].tiers.push(
-        this._tiersService.tiers[i]
-      );
-    }
-    return initialSolution;
+    const roundRobin = new RoundRobin();
+    return roundRobin.exec(this.numberOfPMs, this._tiersService.tiers);
   }
 
   /**
    * Execute a first fit placement
    */
   private executeFF(): Solution {
-    const solution: Solution = new Solution();
-
-    let numPMs = 1;
-
-    for (const tier of this._tiersService.tiers) {
-      let hasAdded = false;
-      for (const pm of solution.PMs) {
-        if (pm.getCapacity() + tier.capacity.capacity <= 1) {
-          pm.tiers.push(tier);
-          hasAdded = true;
-          break;
-        }
-      }
-      if (!hasAdded) {
-        const newPM = new PM();
-        newPM.name = `PM${numPMs++}`;
-        newPM.tiers.push(tier);
-        solution.PMs.push(newPM);
-      }
-    }
-
-    return solution;
+    const firstFit = new FirstFit();
+    return firstFit.exec(this._tiersService.tiers);
   }
 
   /**
@@ -93,25 +64,22 @@ export class PlacementService {
     }
     this.ensurePMNumber();
 
-    this.solutions = undefined;
-    const solutions = [];
+    this.solutions = [];
 
-    solutions.push({
+    this.solutions.push({
       algorithm: 'Simulated Annealing',
       solution: this.executeSA(costFunction)
     });
 
-    solutions.push({
+    this.solutions.push({
       algorithm: 'Round Robin',
       solution: this.executeRR()
     });
 
-    solutions.push({
+    this.solutions.push({
       algorithm: 'First Fit',
       solution: this.executeFF()
     });
-
-    this.solutions = solutions;
     this.generateChartData();
 
     this.toastr.success(
@@ -120,6 +88,9 @@ export class PlacementService {
     );
   }
 
+  /**
+   * Generate the data for displaying a chart with the cost functions of each algorithm
+   */
   generateChartData() {
     this.chartData.data = [];
     for (const solution of this.solutions) {
