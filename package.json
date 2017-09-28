@@ -25,7 +25,6 @@
     "@angular/router": "^4.2.4",
     "@types/lodash": "^4.14.74",
     "@webcomponents/custom-elements": "^1.0.0",
-    "angular2-number-picker": "^0.8.8",
     "chart.js": "^2.7.0",
     "circular-json": "^0.3.3",
     "clarity-angular": "^0.10.6",
