@@ -11,6 +11,7 @@ import { PmsService } from './pms.service';
 import * as CircularJSON from 'circular-json';
 import { Tier } from '../ciapa/datatype/Tier';
 import { BestFit } from '../ciapa/functions/BestFit';
+import { WorstFit } from '../ciapa/functions/WorstFit';
 
 @Injectable()
 export class PlacementService {
@@ -39,11 +40,11 @@ export class PlacementService {
     return pms;
   }
 
-  get tiers(): Tier[]{
+  get tiers(): Tier[] {
     const tiers = <Tier[]>Object.assign(
       CircularJSON.parse(CircularJSON.stringify(this._tiersService.tiers))
     );
-    tiers.sort(function(a, b) {
+    tiers.sort(function (a, b) {
       return b.capacity.capacity - a.capacity.capacity;
     });
     return tiers;
@@ -65,12 +66,20 @@ export class PlacementService {
     return firstFit.exec(this.pms, this.tiers, this.costThreshold, this.sizeNewPMs);
   }
 
-   /**
-   * Execute a best fit placement
-   */
+  /**
+  * Execute a best fit placement
+  */
   private executeBF(): Solution {
     const bestFit = new BestFit();
     return bestFit.exec(this.pms, this.tiers, this.costThreshold, this.sizeNewPMs);
+  }
+
+  /**
+* Execute a worst fit placement
+*/
+  private executeWF(): Solution {
+    const worstFit = new WorstFit();
+    return worstFit.exec(this.pms, this.tiers, this.costThreshold, this.sizeNewPMs);
   }
 
   /**
@@ -117,6 +126,12 @@ export class PlacementService {
       algorithm: 'Best Fit Decreasing',
       short: 'BFD',
       solution: this.executeBF()
+    });
+
+    this.solutions.push({
+      algorithm: 'Worst Fit Decreasing',
+      short: 'WFD',
+      solution: this.executeWF()
     });
 
     this.generateChartData();

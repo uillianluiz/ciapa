@@ -8,8 +8,8 @@ import { PlacementService } from '../../services/placement.service';
 })
 export class ResultsComponent implements OnInit {
 
-  public limitShort = 900;
-  public limitOverflow = 520;
+  public limitShort = 1075;
+  public limitOverflow = 851;
 
   public isOverflow = window.innerWidth < this.limitOverflow;
   public showShort = window.innerWidth < this.limitShort;
