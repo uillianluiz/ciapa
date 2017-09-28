@@ -40,7 +40,7 @@
                 <span class="badge">{{pm.tiers.length}}</span>
             </span>
           </clr-stack-label>
-          <clr-stack-content>{{(pm.getCapacityUsed()*100).toFixed(2)}}%</clr-stack-content>
+          <clr-stack-content>{{(pm.getCapacityUsed()* 100).toFixed(0)}}% of {{pm.capacity * 100}}%</clr-stack-content>
           <clr-stack-block *ngFor="let tier of pm.tiers">
             <clr-stack-label>
               {{tier.name}}

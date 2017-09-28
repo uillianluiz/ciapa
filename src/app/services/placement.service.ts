@@ -7,6 +7,8 @@ import { Solution } from '../ciapa/datatype/Solution';
 import { TiersService } from './tiers.service';
 import { ToastrService } from 'ngx-toastr';
 import { FirstFit } from '../ciapa/functions/FirstFit';
+import { PmsService } from './pms.service';
+import * as CircularJSON from 'circular-json';
 
 @Injectable()
 export class PlacementService {
@@ -16,15 +18,28 @@ export class PlacementService {
 
   constructor(
     public _tiersService: TiersService,
+    private _pmsService: PmsService,
     private toastr: ToastrService
   ) {}
+
+
+  get pms(): PM[] {
+    const pms = <PM[]>Object.assign(
+      CircularJSON.parse(CircularJSON.stringify(this._pmsService.pms))
+    );
+
+    for (let i = 0; i < pms.length; i++) {
+      pms[i] = <PM>Object.assign(new PM(), pms[i]);
+    }
+    return pms;
+  }
 
   /**
    * Generate a round robin placement
    */
   private executeRR(): Solution {
     const roundRobin = new RoundRobin();
-    return roundRobin.exec(this.numberOfPMs, this._tiersService.tiers);
+    return roundRobin.exec(this.pms, this._tiersService.tiers);
   }
 
   /**

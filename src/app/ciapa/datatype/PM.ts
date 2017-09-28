@@ -9,7 +9,7 @@ class PM {
   public capacity: number;
 
   private cost: number = undefined;
-  public hasChanged = false;
+  public hasChanged = true;
 
   /**
      * Create the PM, giving a sequential name to it.
@@ -32,11 +32,13 @@ class PM {
      * It keeps the result while the tiers in the PM don't change.
      */
   public getCost(): number {
+    return PM.model.cost(this.tiers, this.capacity);
+    /*
     if (this.cost === undefined || this.hasChanged) {
       this.cost = PM.model.cost(this.tiers, this.capacity);
       this.hasChanged = false;
     }
-    return this.cost;
+    return this.cost;*/
   }
 
   /**

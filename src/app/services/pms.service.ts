@@ -27,6 +27,9 @@ export class PmsService {
       return false;
     } else {
       this.pms = CircularJSON.parse(localStorage.getItem('pms'));
+      for (let i = 0; i < this.pms.length; i++) {
+        this.pms[i] = <PM>Object.assign(new PM(), this.pms[i]);
+      }
       return true;
     }
   }
