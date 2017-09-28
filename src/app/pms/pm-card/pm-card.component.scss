@@ -5,3 +5,11 @@
 input {
     width: 100%;
 }
+
+.info {
+    margin-left: -10px;
+    &:hover {
+      cursor: pointer;
+      color: #006a91;
+    }
+  }

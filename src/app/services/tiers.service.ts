@@ -53,7 +53,7 @@ export class TiersService {
   }
 
   addAffinity(tierId: number): void {
-    this.tiers[tierId].affinity.addAffinity(
+    this.tiers[tierId].affinity.affinities.push(
       new AffinityElement(null, DegradationAffinity.Absent)
     );
   }

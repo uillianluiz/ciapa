@@ -11,6 +11,7 @@ export class PmCardComponent implements OnInit {
   @Input('pmId') pmId: number;
 
   public _deletePMModal = false;
+  public _infoModel = false;
 
   constructor(private _pmsService: PmsService) { }
 
