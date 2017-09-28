@@ -137,7 +137,7 @@ export class PlacementService {
     this.generateChartData();
 
     this.toastr.success(
-      'All placement comparations were successfully generated.',
+      'All placement settings were successfully generated.',
       'Success'
     );
   }

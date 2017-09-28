@@ -1,3 +1,11 @@
 input {
   width: 100%;
 }
+
+.info {
+  float: right;
+  &:hover {
+    cursor: pointer;
+    color: #006a91;
+  }
+}

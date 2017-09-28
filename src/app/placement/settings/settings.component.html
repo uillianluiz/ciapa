@@ -1,6 +1,11 @@
 <div class="container">
   <div class="card">
-    <h4 class="card-header">Placement Settings</h4>
+    <h4 class="card-header">
+      Placement Settings
+      <div class="info" (click)="helpActive = true">
+        <clr-icon shape="help"></clr-icon>
+      </div>
+    </h4>
     <div class="card-block">
       <div class="row">
         <div class="col-xs-5 col-sm-4 col-md-3 col-lg-2">Cost Function:</div>
@@ -36,3 +41,45 @@
     </div>
   </div>
 </div>
+
+<clr-modal [(clrModalOpen)]="helpActive" [clrModalSize]="'lg'">
+  <h3 class="modal-title">Placement settings info</h3>
+  <div class="modal-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="left">Setting</th>
+          <th class="left">Affects</th>
+          <th class="left">Options</th>
+          <th class="left">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="left">Cost Function</td>
+          <td class="left">SA</td>
+          <td class="left">Average, Multiplication</td>
+          <td class="left">Defines the cost function that will be applied in order to generate the best placement settings. Average tends
+            to be the best option since it tries to minimize the cost evenly. Multiplication tends to find a best combination
+            but leads to some PMs too overloaded and others too underloaded.</td>
+        </tr>
+        <tr>
+          <td class="left">Cost Threshold</td>
+          <td class="left">FFD, BFD, WFD</td>
+          <td class="left">[1, 100]</td>
+          <td class="left">Defines the cost threshold that is used in order to generate the placement. If the PM cost is over the threshold
+            it should not be used. Lower thresholds may generate higher number of PMs.</td>
+        </tr>
+        <tr>
+          <td class="left">Size of new PMs</td>
+          <td class="left">FFD, BFD, WFD</td>
+          <td class="left">[0.1, 5]</td>
+          <td class="left">Defines the size of the the new PMs that must be added in case the tier won't fit the PMs currently available.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="helpActive = false">Ok</button>
+  </div>
+</clr-modal>
