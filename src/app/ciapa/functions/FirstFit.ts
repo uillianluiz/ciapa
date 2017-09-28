@@ -14,7 +14,7 @@ class FirstFit {
     for (const tier of tiers) {
       let hasAdded = false;
       for (const pm of solution.PMs) {
-        if (pm.getCapacity() + tier.capacity.capacity <= 1) {
+        if (pm.getCapacityUsed() + tier.capacity.capacity <= 1) {
           pm.tiers.push(tier);
           hasAdded = true;
           break;

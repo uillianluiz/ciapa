@@ -6,6 +6,7 @@ class PM {
   static counter = 1;
   public tiers: Tier[] = [];
   public name: string;
+  public capacity: number;
 
   private cost: number = undefined;
   public hasChanged = false;
@@ -13,11 +14,12 @@ class PM {
   /**
      * Create the PM, giving a sequential name to it.
      */
-  constructor() {
+  constructor(capacity = 1) {
+    this.capacity = capacity;
     this.name = 'PM' + PM.counter++;
   }
 
-  getCapacity(): number {
+  getCapacityUsed(): number {
     let used = 0;
     for (const tier of this.tiers) {
       used += tier.capacity.capacity;
