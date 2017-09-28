@@ -47,7 +47,7 @@ export class PlacementService {
    */
   private executeFF(): Solution {
     const firstFit = new FirstFit();
-    return firstFit.exec(this._tiersService.tiers);
+    return firstFit.exec(this.pms, this._tiersService.tiers);
   }
 
   /**

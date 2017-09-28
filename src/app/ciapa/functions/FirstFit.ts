@@ -6,8 +6,9 @@ import { Tier } from '../datatype/Tier';
  * Place the tiers in a first fit fashion, checking only the PMs capacity, and adding more PMs as necessary
  */
 class FirstFit {
-  public exec(tiers: Tier[]): Solution {
+  public exec(pms: PM[], tiers: Tier[]): Solution {
     const solution: Solution = new Solution();
+    solution.PMs = pms;
 
     let numPMs = 1;
 
