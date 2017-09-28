@@ -12,7 +12,7 @@
     </clr-tab-content>
   </clr-tab>
   <clr-tab *ngFor="let solution of _placementService.solutions">
-    <button clrTabLink [clrTabLinkInOverflow]="inOverflow">{{solution.algorithm}}</button>
+    <button clrTabLink [clrTabLinkInOverflow]="isOverflow">{{solution.algorithm}}</button>
     <clr-tab-content *clrIfActive>
       <clr-stack-view>
         <clr-stack-header>

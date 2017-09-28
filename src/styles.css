@@ -7,6 +7,10 @@ body {
 	overflow-x: hidden;
 }
 
+.nav-link {
+  outline: none !important;
+}
+
 .pre-bootstrap {
   position: absolute;
   left: calc(50% - 30px);
