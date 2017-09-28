@@ -6,22 +6,30 @@ import { Tier } from '../datatype/Tier';
  * Place the tiers in a best fit fashion, checking only the PMs capacity, and adding more PMs as necessary
  */
 class BestFit {
-  public exec(pms: PM[], tiers: Tier[]): Solution {
+  public exec(pms: PM[], tiers: Tier[], costThreshold: number, sizeNewPMs: number): Solution {
     const solution: Solution = new Solution();
     solution.PMs = pms;
 
     for (const tier of tiers) {
-      let hasAdded = false;
+      let bestPM: PM;
+      let used = Number.MAX_SAFE_INTEGER;
       for (const pm of solution.PMs) {
-        if (pm.getCapacityUsed() + tier.capacity.capacity <= pm.capacity) {
-          pm.tiers.push(tier);
-          hasAdded = true;
-          break;
+        pm.tiers.push(tier);
+
+        if (pm.capacity - pm.getCapacityUsed() < used && pm.getCost() <= costThreshold) {
+          used = pm.capacity - pm.getCapacityUsed();
+          bestPM = pm;
         }
+
+        pm.tiers.pop();
       }
-      if (!hasAdded) {
+
+      if (bestPM !== undefined) {
+        bestPM.tiers.push(tier);
+      } else {
         const newPM = new PM();
         newPM.name = `+PM${solution.PMs.length + 1}`;
+        newPM.capacity = sizeNewPMs;
         newPM.tiers.push(tier);
         solution.PMs.push(newPM);
       }

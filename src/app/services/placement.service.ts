@@ -10,6 +10,7 @@ import { FirstFit } from '../ciapa/functions/FirstFit';
 import { PmsService } from './pms.service';
 import * as CircularJSON from 'circular-json';
 import { Tier } from '../ciapa/datatype/Tier';
+import { BestFit } from '../ciapa/functions/BestFit';
 
 @Injectable()
 export class PlacementService {
@@ -64,6 +65,14 @@ export class PlacementService {
     return firstFit.exec(this.pms, this.tiers, this.costThreshold, this.sizeNewPMs);
   }
 
+   /**
+   * Execute a best fit placement
+   */
+  private executeBF(): Solution {
+    const bestFit = new BestFit();
+    return bestFit.exec(this.pms, this.tiers, this.costThreshold, this.sizeNewPMs);
+  }
+
   /**
    * Generate a placement based on the simulated annealing algorithm
    */
@@ -103,6 +112,13 @@ export class PlacementService {
       short: 'FFD',
       solution: this.executeFF()
     });
+
+    this.solutions.push({
+      algorithm: 'Best Fit Decreasing',
+      short: 'BFD',
+      solution: this.executeBF()
+    });
+
     this.generateChartData();
 
     this.toastr.success(

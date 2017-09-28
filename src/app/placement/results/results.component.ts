@@ -8,11 +8,11 @@ import { PlacementService } from '../../services/placement.service';
 })
 export class ResultsComponent implements OnInit {
 
-  public limitShort = 740;
-  public limitOverflow = 500;
+  public limitShort = 900;
+  public limitOverflow = 520;
 
   public isOverflow = window.innerWidth < this.limitOverflow;
-  public showShort = window.innerHeight < this.limitShort;
+  public showShort = window.innerWidth < this.limitShort;
   constructor(public _placementService: PlacementService) { }
 
   ngOnInit() { }
