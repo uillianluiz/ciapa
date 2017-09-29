@@ -16,7 +16,7 @@ import { WorstFit } from '../ciapa/functions/WorstFit';
 @Injectable()
 export class PlacementService {
   public solutions = undefined;
-  public chartData = { dataAVG: [], dataMult: [] };
+  public chartData = { dataAVG: [], dataMult: [], dataPMs: []};
   public costFunction = 'getCostAVG';
   public costThreshold = 10;
   public sizeNewPMs = 1;
@@ -156,6 +156,11 @@ export class PlacementService {
       });
       this.chartData.dataMult.push({
         data: [solution.solution.getCost().toFixed(2)],
+        label: solution.short
+      });
+
+      this.chartData.dataPMs.push({
+        data: [solution.solution.PMs.length],
         label: solution.short
       });
     }

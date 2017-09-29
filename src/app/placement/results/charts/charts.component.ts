@@ -14,6 +14,24 @@ export class ChartsComponent implements OnInit {
     title: {
       display: true,
       text: 'Cost Comparison'
+    }
+  };
+
+  public barChartOptionsPMs: any = {
+    scaleShowVerticalLines: false,
+    responsive: true,
+    maintainAspectRatio: true,
+    title: {
+      display: true,
+      text: 'Number of PMs'
+    },
+    scales: {
+      yAxes: [{
+          ticks: {
+              min: 0,
+              stepSize: 1
+          }
+      }]
   }
   };
 
@@ -24,10 +42,11 @@ export class ChartsComponent implements OnInit {
 
   public labelsMult = ['Multiplication'];
   public labelsAVG = ['Average'];
+  public labelsPMs = ['PMs'];
 
-  constructor(public _placementService: PlacementService) {}
+  constructor(public _placementService: PlacementService) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   get dataAVG() {
     return this._placementService.chartData.dataAVG;
@@ -35,6 +54,10 @@ export class ChartsComponent implements OnInit {
 
   get dataMult() {
     return this._placementService.chartData.dataMult;
+  }
+
+  get dataPMs() {
+    return this._placementService.chartData.dataPMs;
   }
 
   handleBarToggle() {
