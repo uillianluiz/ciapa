@@ -1,3 +1,4 @@
+<app-empty-list *ngIf="tiers.length == 0" item="tier"></app-empty-list>
 <div class="content-container">
   <div class="content-area">
     <div class="row" dnd-sortable-container [dropZones]="['tiers']" [sortableData]="tiers">

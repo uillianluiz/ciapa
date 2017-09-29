@@ -1,3 +1,4 @@
+<app-empty-list *ngIf="pms.length == 0" item="PM"></app-empty-list>
 <div class="content-container">
   <div class="content-area">
     <div class="row" dnd-sortable-container [dropZones]="['pms']" [sortableData]="pms">

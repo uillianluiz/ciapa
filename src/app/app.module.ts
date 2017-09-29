@@ -23,6 +23,7 @@ import { ChartsComponent } from './placement/results/charts/charts.component';
 import { PmsComponent } from './pms/pms.component';
 import { PmsService } from './services/pms.service';
 import { PmCardComponent } from './pms/pm-card/pm-card.component';
+import { EmptyListComponent } from './shared/empty-list/empty-list.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { PmCardComponent } from './pms/pm-card/pm-card.component';
     ResultsComponent,
     ChartsComponent,
     PmsComponent,
-    PmCardComponent
+    PmCardComponent,
+    EmptyListComponent
   ],
   imports: [
     RoutingModule,
