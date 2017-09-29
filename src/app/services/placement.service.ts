@@ -149,6 +149,7 @@ export class PlacementService {
   generateChartData() {
     this.chartData.dataAVG = [];
     this.chartData.dataMult = [];
+    this.chartData.dataPMs = [];
     for (const solution of this.solutions) {
       this.chartData.dataAVG.push({
         data: [solution.solution.getCostAVG().toFixed(2)],
