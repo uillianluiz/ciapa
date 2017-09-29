@@ -31,7 +31,13 @@ export class ChartsComponent implements OnInit {
               min: 0,
               stepSize: 1
           }
-      }]
+      }],
+      xAxes: [{
+        ticks: {
+            min: 0,
+            stepSize: 1
+        }
+    }]
   }
   };
 
