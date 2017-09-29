@@ -18,7 +18,6 @@ export class ChartsComponent implements OnInit {
   };
 
   public barToggle = false;
-  public dataToogle = true;
 
   public barChartType = 'bar';
   public barChartLegend = true;

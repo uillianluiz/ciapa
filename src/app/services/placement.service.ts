@@ -17,6 +17,7 @@ import { WorstFit } from '../ciapa/functions/WorstFit';
 export class PlacementService {
   public solutions = undefined;
   public chartData = { dataAVG: [], dataMult: [] };
+  public costFunction = 'getCostAVG';
   public costThreshold = 10;
   public sizeNewPMs = 1;
 
@@ -85,15 +86,15 @@ export class PlacementService {
   /**
    * Generate a placement based on the simulated annealing algorithm
    */
-  executeSA(costFunction: string): Solution {
+  executeSA(): Solution {
     const simulatedAnnealing = new SimulatedAnnealing();
-    return simulatedAnnealing.exec(this.executeRR(), costFunction);
+    return simulatedAnnealing.exec(this.executeRR(), this.costFunction);
   }
 
   /**
    * Execute all placement algorithms available
    */
-  execute(costFunction: string) {
+  execute() {
     if (this._tiersService.tiers.length === 0) {
       this.toastr.error('There are no tiers to place.', 'Error');
       return;
@@ -107,7 +108,7 @@ export class PlacementService {
     this.solutions.push({
       algorithm: 'Simulated Annealing',
       short: 'SA',
-      solution: this.executeSA(costFunction)
+      solution: this.executeSA()
     });
 
     this.solutions.push({

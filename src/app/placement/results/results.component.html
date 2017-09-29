@@ -1,19 +1,19 @@
 <clr-tabs>
   <clr-tab>
     <button clrTabLink>Settings</button>
-    <clr-tab-content *clrIfActive>
+    <clr-tab-content>
       <app-settings></app-settings>
     </clr-tab-content>
   </clr-tab>
   <clr-tab *ngIf="_placementService.solutions != undefined">
     <button clrTabLink>Costs Comparison</button>
-    <clr-tab-content *clrIfActive>
+    <clr-tab-content>
       <app-charts></app-charts>
     </clr-tab-content>
   </clr-tab>
   <clr-tab *ngFor="let solution of _placementService.solutions">
     <button clrTabLink [clrTabLinkInOverflow]="isOverflow">{{showShort ? solution.short : solution.algorithm}}</button>
-    <clr-tab-content *clrIfActive>
+    <clr-tab-content>
       <clr-stack-view>
         <clr-stack-header>
           Cost functions:
