@@ -53,44 +53,6 @@
           </div>
         </div>
       </div>
-
-
-
-      <!--   <clr-stack-view>
-        <clr-stack-header>
-          Cost functions:
-          <span class="label label-orange">
-            {{solution.solution.getCost().toFixed(3)}}
-            <span class="badge tooltip tooltip-sm" role="tooltip">
-              M
-              <span class="tooltip-content">Multiplication</span>
-          </span>
-          </span>
-          <span class="label label-orange">
-            {{solution.solution.getCostAVG().toFixed(3)}}
-            <span class="badge tooltip tooltip-sm" role="tooltip">
-              A
-              <span class="tooltip-content">Average</span>
-          </span>
-          </span>
-        </clr-stack-header>
-        <clr-stack-block [clrSbExpanded]="false" *ngFor="let pm of solution.solution.PMs">
-          <clr-stack-label>
-            {{pm.name}}
-            <span class="label label-blue">
-                {{pm.getCost().toFixed(3)}}
-                <span class="badge">{{pm.tiers.length}}</span>
-            </span>
-          </clr-stack-label>
-          <clr-stack-content>{{(pm.getCapacityUsed()* 100).toFixed(0)}}/{{pm.capacity * 100}}</clr-stack-content>
-          <clr-stack-block *ngFor="let tier of pm.tiers">
-            <clr-stack-label>
-              {{tier.name}}
-            </clr-stack-label>
-            <clr-stack-content>{{(tier.capacity.capacity*100).toFixed(0)}}</clr-stack-content>
-          </clr-stack-block>
-        </clr-stack-block>
-      </clr-stack-view> -->
     </clr-tab-content>
   </clr-tab>
 </clr-tabs>
