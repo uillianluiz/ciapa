@@ -7,24 +7,26 @@ import { PlacementService } from '../../services/placement.service';
   styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent implements OnInit {
-
   public isExecuting = false;
   public helpActive = false;
 
-  constructor(
-    public _placementService: PlacementService
-  ) { }
+  constructor(public _placementService: PlacementService) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   execute(): void {
     this.isExecuting = true;
-    this._placementService.execute();
+    this._placementService.resetData();
+    setTimeout(
+      this._placementService.execute.bind(
+        this._placementService,
+        this.finishedExecuting.bind(this)
+      ),
+      15
+    );
   }
 
   finishedExecuting(): void {
     this.isExecuting = false;
   }
-
 }

@@ -15,8 +15,8 @@ import { WorstFit } from '../ciapa/functions/WorstFit';
 
 @Injectable()
 export class PlacementService {
-  public solutions = undefined;
-  public chartData = { dataAVG: [], dataMult: [], dataPMs: []};
+  public solutions = [];
+  public chartData = { dataAVG: [], dataMult: [], dataPMs: [] };
   public costFunction = 'getCostAVG';
   public temperature = 10000000;
   public coolingRate = 0.003;
@@ -27,7 +27,7 @@ export class PlacementService {
     public _tiersService: TiersService,
     private _pmsService: PmsService,
     private toastr: ToastrService
-  ) { }
+  ) {}
 
   /**
    * Create a copy of the PMs (clone)
@@ -47,7 +47,7 @@ export class PlacementService {
     const tiers = <Tier[]>Object.assign(
       CircularJSON.parse(CircularJSON.stringify(this._tiersService.tiers))
     );
-    tiers.sort(function (a, b) {
+    tiers.sort(function(a, b) {
       return b.capacity.capacity - a.capacity.capacity;
     });
     return tiers;
@@ -66,7 +66,12 @@ export class PlacementService {
    */
   private executeFF(): Solution {
     const firstFit = new FirstFit();
-    return firstFit.exec(this.pms, this.tiers, this.costThreshold, this.sizeNewPMs);
+    return firstFit.exec(
+      this.pms,
+      this.tiers,
+      this.costThreshold,
+      this.sizeNewPMs
+    );
   }
 
   /**
@@ -74,7 +79,12 @@ export class PlacementService {
   */
   private executeBF(): Solution {
     const bestFit = new BestFit();
-    return bestFit.exec(this.pms, this.tiers, this.costThreshold, this.sizeNewPMs);
+    return bestFit.exec(
+      this.pms,
+      this.tiers,
+      this.costThreshold,
+      this.sizeNewPMs
+    );
   }
 
   /**
@@ -82,30 +92,43 @@ export class PlacementService {
 */
   private executeWF(): Solution {
     const worstFit = new WorstFit();
-    return worstFit.exec(this.pms, this.tiers, this.costThreshold, this.sizeNewPMs);
+    return worstFit.exec(
+      this.pms,
+      this.tiers,
+      this.costThreshold,
+      this.sizeNewPMs
+    );
   }
 
   /**
    * Generate a placement based on the simulated annealing algorithm
    */
   executeSA(): Solution {
-    const simulatedAnnealing = new SimulatedAnnealing(this.temperature, this.coolingRate);
+    const simulatedAnnealing = new SimulatedAnnealing(
+      this.temperature,
+      this.coolingRate
+    );
     return simulatedAnnealing.exec(this.executeRR(), this.costFunction);
+  }
+
+  resetData(): void {
+    this.solutions = [];
+    this.chartData = { dataAVG: [], dataMult: [], dataPMs: [] };
   }
 
   /**
    * Execute all placement algorithms available
    */
-  execute() {
+  execute(fn: () => void) {
     if (this._tiersService.tiers.length === 0) {
       this.toastr.error('There are no tiers to place.', 'Error');
+      fn();
       return;
     } else if (this._pmsService.pms.length === 0) {
       this.toastr.error('There should be at least one PM.', 'Error');
+      fn();
       return;
     }
-
-    this.solutions = [];
 
     this.solutions.push({
       algorithm: 'Simulated Annealing',
@@ -143,6 +166,8 @@ export class PlacementService {
       'All placement settings were successfully generated.',
       'Success'
     );
+
+    fn();
   }
 
   /**

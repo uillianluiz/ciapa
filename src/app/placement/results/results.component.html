@@ -5,7 +5,7 @@
       <app-settings></app-settings>
     </clr-tab-content>
   </clr-tab>
-  <clr-tab *ngIf="_placementService.solutions != undefined">
+  <clr-tab *ngIf="_placementService.solutions.length != 0">
     <button clrTabLink>Costs Comparison</button>
     <clr-tab-content *clrIfActive>
       <app-charts></app-charts>
