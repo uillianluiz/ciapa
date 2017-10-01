@@ -8,7 +8,9 @@ import { PlacementService } from '../../services/placement.service';
 })
 export class SettingsComponent implements OnInit {
 
+  public isExecuting = false;
   public helpActive = false;
+
   constructor(
     public _placementService: PlacementService
   ) { }
@@ -17,7 +19,12 @@ export class SettingsComponent implements OnInit {
   }
 
   execute(): void {
+    this.isExecuting = true;
     this._placementService.execute();
+  }
+
+  finishedExecuting(): void {
+    this.isExecuting = false;
   }
 
 }

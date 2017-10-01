@@ -4,6 +4,11 @@ class SimulatedAnnealing {
   private temperature = 10000000;
   private coolingRate = 0.003;
 
+  constructor(temperature: number, coolingRate: number) {
+    this.temperature = temperature;
+    this.coolingRate = coolingRate;
+  }
+
   /**
      * Calculates the acceptance probability
      * @param currentCost the cost of the current solution
@@ -35,7 +40,7 @@ class SimulatedAnnealing {
     let numOp = 0;
 
     let noChange = 0;
-    const maxNoChange = 1000;
+    const maxNoChange = 10000;
 
     while (temperature > 1 && noChange < maxNoChange) {
       numOp++;

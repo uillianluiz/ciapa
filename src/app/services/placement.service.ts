@@ -18,6 +18,8 @@ export class PlacementService {
   public solutions = undefined;
   public chartData = { dataAVG: [], dataMult: [], dataPMs: []};
   public costFunction = 'getCostAVG';
+  public temperature = 10000000;
+  public coolingRate = 0.003;
   public costThreshold = 10;
   public sizeNewPMs = 1;
 
@@ -87,7 +89,7 @@ export class PlacementService {
    * Generate a placement based on the simulated annealing algorithm
    */
   executeSA(): Solution {
-    const simulatedAnnealing = new SimulatedAnnealing();
+    const simulatedAnnealing = new SimulatedAnnealing(this.temperature, this.coolingRate);
     return simulatedAnnealing.exec(this.executeRR(), this.costFunction);
   }
 
