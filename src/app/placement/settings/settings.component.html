@@ -67,7 +67,7 @@
   </div>
 </div>
 
-<clr-modal [(clrModalOpen)]="helpActive" [clrModalSize]="'lg'">
+<clr-modal [(clrModalOpen)]="helpActive" [clrModalSize]="'xl'">
   <h3 class="modal-title">Placement settings info</h3>
   <div class="modal-body">
     <table class="table">
@@ -87,6 +87,20 @@
           <td class="left">Defines the cost function that will be applied in order to generate the best placement settings. Average tends
             to be the best option since it tries to minimize the cost evenly. Multiplication tends to find a best combination
             but leads to some PMs too overloaded and others too underloaded.</td>
+        </tr>
+        <tr>
+          <td class="left">Temperature</td>
+          <td class="left">SA</td>
+          <td class="left">number</td>
+          <td class="left">The greater the temperature is in a given state, the higher the changes are to it accept a state that leads to
+            a greater cost. As the temperature cools down, it tends to stop accepting worse states and focuses on the better
+            ones. </td>
+        </tr>
+        <tr>
+          <td class="left">Cooling Tate</td>
+          <td class="left">SA</td>
+          <td class="left">number</td>
+          <td class="left">The cooling rate determines how much the temperature will cool down at each iteration. It determines the total number of interactions </td>
         </tr>
         <tr>
           <td class="left">Cost Threshold</td>
