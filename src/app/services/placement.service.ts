@@ -12,6 +12,7 @@ import * as CircularJSON from 'circular-json';
 import { Tier } from '../ciapa/datatype/Tier';
 import { BestFit } from '../ciapa/functions/BestFit';
 import { WorstFit } from '../ciapa/functions/WorstFit';
+import { HillClimbing } from '../ciapa/functions/HillClimbing';
 
 @Injectable()
 export class PlacementService {
@@ -20,6 +21,7 @@ export class PlacementService {
   public costFunction = 'getCostAVG';
   public temperature = 10000000;
   public coolingRate = 0.003;
+  public hcIterations = 5000;
   public costThreshold = 10;
   public sizeNewPMs = 1;
 
@@ -27,7 +29,7 @@ export class PlacementService {
     public _tiersService: TiersService,
     private _pmsService: PmsService,
     private toastr: ToastrService
-  ) {}
+  ) { }
 
   /**
    * Create a copy of the PMs (clone)
@@ -47,7 +49,7 @@ export class PlacementService {
     const tiers = <Tier[]>Object.assign(
       CircularJSON.parse(CircularJSON.stringify(this._tiersService.tiers))
     );
-    tiers.sort(function(a, b) {
+    tiers.sort(function (a, b) {
       return b.capacity.capacity - a.capacity.capacity;
     });
     return tiers;
@@ -111,6 +113,14 @@ export class PlacementService {
     return simulatedAnnealing.exec(this.executeRR(), this.costFunction);
   }
 
+  /**
+   * Generate a placement based on the hill climbing algorithm
+   */
+  executeHC(): Solution {
+    const hillClimbing = new HillClimbing(this.hcIterations);
+    return hillClimbing.exec(this.executeRR(), this.costFunction);
+  }
+
   resetData(): void {
     this.solutions = [];
     this.chartData = { dataAVG: [], dataMult: [], dataPMs: [] };
@@ -131,6 +141,12 @@ export class PlacementService {
     }
 
     this.solutions.push({
+      algorithm: 'Hill Climbing',
+      short: 'HC',
+      solution: this.executeHC()
+    });
+
+    this.solutions.push({
       algorithm: 'Simulated Annealing',
       short: 'SA',
       solution: this.executeSA()
@@ -143,19 +159,19 @@ export class PlacementService {
     });
 
     this.solutions.push({
-      algorithm: 'First Fit Decreasing',
+      algorithm: 'First Fit',
       short: 'FFD',
       solution: this.executeFF()
     });
 
     this.solutions.push({
-      algorithm: 'Best Fit Decreasing',
+      algorithm: 'Best Fit',
       short: 'BFD',
       solution: this.executeBF()
     });
 
     this.solutions.push({
-      algorithm: 'Worst Fit Decreasing',
+      algorithm: 'Worst Fit',
       short: 'WFD',
       solution: this.executeWF()
     });

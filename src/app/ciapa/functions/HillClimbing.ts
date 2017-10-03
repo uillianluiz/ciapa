@@ -3,12 +3,16 @@ import { Solution } from '../datatype/Solution';
 class HillClimbing {
   private iterations = 5000;
 
+  constructor(iterations: number) {
+    this.iterations = iterations;
+  }
+
   /**
      * It executes the hill climbing algorithm and returns the best local solution
      * @param initial initial solution
      * @return best solution found
      */
-  exec(initial: Solution): Solution {
+  exec(initial: Solution, costFunction = 'getCost'): Solution {
     let iterations = this.iterations;
     let best = initial;
 
@@ -23,8 +27,8 @@ class HillClimbing {
 
       newSolution.randomSwap();
 
-      const bestCost = best.getCost();
-      const newCost = newSolution.getCost();
+      const bestCost = best[costFunction]();
+      const newCost = newSolution[costFunction]();
 
       if (newCost < bestCost) {
         best = newSolution;
