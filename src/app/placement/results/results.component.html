@@ -38,9 +38,12 @@
               <div class="progress top" [ngClass]="(pm.getCapacityUsed()*100)/pm.capacity >= 100 ? 'danger' : 'success'">
                 <progress [value]="pm.getCapacityUsed()" [max]="pm.capacity"></progress>
               </div>
-              <h4 class="card-title">
-                {{pm.name}}
-                <span class="right">{{(pm.getCapacityUsed()* 100).toFixed(0)}}/{{pm.capacity * 100}}</span>
+              <h4 class="card-title center">
+                <span class="left" title="PM Name">{{pm.name}}</span>
+                <span class="label label-orange" title="PM Cost">
+                  {{pm.getCost().toFixed(2)}}
+                </span>
+                <span class="right" title="PM Occupation">{{(pm.getCapacityUsed()* 100).toFixed(0)}}/{{pm.capacity * 100}}</span>
               </h4>
             </div>
 
