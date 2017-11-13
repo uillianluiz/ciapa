@@ -19,8 +19,8 @@ export class PlacementService {
   public solutions = [];
   public chartData = { dataAVG: [], dataMult: [], dataPMs: [] };
   public costFunction = 'getCostAVG';
-  public temperature = 10000000;
-  public coolingRate = 0.003;
+  public temperature = 100000;
+  public coolingRate = 0.005;
   public hcIterations = 5000;
   public costThreshold = 10;
   public sizeNewPMs = 1;
