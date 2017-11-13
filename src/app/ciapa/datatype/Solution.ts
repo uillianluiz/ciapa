@@ -48,13 +48,13 @@ class Solution {
 
   /**
   * Generate a random modification of the current solution.
-  * 75% of chance of swaping two tiers
-  * 25% of change of moving a tier to a new PM
+  * 50% of chance of swaping two tiers
+  * 50% of change of moving a tier to a new PM
   */
   public randomSwap(): void {
     const rand = Math.random();
 
-    if (rand > 0.25) {
+    if (rand > 0.5) {
       this.swap();
     } else {
       this.move();

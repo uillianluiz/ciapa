@@ -24,7 +24,7 @@ class SimulatedAnnealing {
     if (newCost < currentCost) {
       return 1.0;
     }
-    return Math.exp((currentCost - newCost) / temperature);
+    return Math.exp((currentCost - newCost) / (temperature));
   }
 
   /**
@@ -42,7 +42,7 @@ class SimulatedAnnealing {
     let noChange = 0;
     const maxNoChange = 10000;
 
-    while (temperature > 1 && noChange < maxNoChange) {
+    while (temperature > 0.000001 && noChange < maxNoChange) {
       numOp++;
       const newSolution = Solution.copy(currentSolution);
 
@@ -65,7 +65,7 @@ class SimulatedAnnealing {
       noChange++;
       temperature *= 1 - this.coolingRate;
     }
-    // console.log('NumOp: ' + numOp);
+    console.log('SA NumOp: ' + numOp);
     return best;
   }
 }

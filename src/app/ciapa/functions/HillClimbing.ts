@@ -19,7 +19,7 @@ class HillClimbing {
     let numOp = 0;
 
     let noChange = 0;
-    const maxNoChange = 1000;
+    const maxNoChange = 2000;
 
     while (iterations > 1 && noChange < maxNoChange) {
       numOp++;
@@ -38,7 +38,7 @@ class HillClimbing {
       noChange++;
       iterations--;
     }
-    console.log('NumOp: ' + numOp);
+    console.log('HC NumOp: ' + numOp);
     return best;
   }
 }
