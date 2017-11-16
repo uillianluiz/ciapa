@@ -32,7 +32,23 @@
         </div>
       </div>
 
+      <div class="row">
+        <div class="col-xs-12">
+          <clr-checkbox name="compareInterferenceAffinity" id="compareInterferenceAffinity" [(ngModel)]="_placementService.compareInterferenceAffinity">
+            Compare to interference and affinity-aware algorithms
+          </clr-checkbox>
+        </div>
+      </div>
+
       <hr/>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <clr-checkbox name="executeBinPacking" id="executeBinPacking" [(ngModel)]="_placementService.executeBinPacking">
+            Execute cost threshold algorithms
+          </clr-checkbox>
+        </div>
+      </div>
 
       <div class="row">
         <div class="col-xs-5 col-sm-4 col-md-3 col-lg-2">Cost Threshold:</div>
@@ -51,15 +67,15 @@
       <div class="row">
         <div class="col-xs-12">
           <button class="btn btn-block btn-primary" style="margin-top:10px;" (click)="execute()" [disabled]="isExecuting">
-              <span *ngIf="!isExecuting">Generate Placement</span>
-              <span *ngIf="isExecuting">
-                  <span class="spinner spinner-inline">
-                      Loading...
-                  </span>
-                  <span>
-                      Loading...
-                  </span>
+            <span *ngIf="!isExecuting">Generate Placement</span>
+            <span *ngIf="isExecuting">
+              <span class="spinner spinner-inline">
+                Loading...
               </span>
+              <span>
+                Loading...
+              </span>
+            </span>
           </button>
         </div>
       </div>
@@ -100,7 +116,8 @@
           <td class="left">Cooling Tate</td>
           <td class="left">SA</td>
           <td class="left">number</td>
-          <td class="left">The cooling rate determines how much the temperature will cool down at each iteration. It determines the total number of interactions </td>
+          <td class="left">The cooling rate determines how much the temperature will cool down at each iteration. It determines the total
+            number of interactions </td>
         </tr>
         <tr>
           <td class="left">Cost Threshold</td>

@@ -25,6 +25,9 @@ export class PlacementService {
   public costThreshold = 10;
   public sizeNewPMs = 1;
 
+  public executeBinPacking = false;
+  public compareInterferenceAffinity = false;
+
   constructor(
     public _tiersService: TiersService,
     private _pmsService: PmsService,
@@ -121,17 +124,17 @@ export class PlacementService {
     return hillClimbing.exec(this.executeRR(), this.costFunction);
   }
 
-    /**
-   * Generate a placement based on the hill climbing algorithm
-   */
+  /**
+ * Generate a placement based on the hill climbing algorithm
+ */
   executeInterference(): Solution {
     const hillClimbing = new HillClimbing(this.hcIterations);
     return hillClimbing.exec(this.executeRR(), 'getCostInt');
   }
 
-    /**
-   * Generate a placement based on the hill climbing algorithm
-   */
+  /**
+ * Generate a placement based on the hill climbing algorithm
+ */
   executeAffinity(): Solution {
     const hillClimbing = new HillClimbing(this.hcIterations);
     return hillClimbing.exec(this.executeRR(), 'getCostAff');
@@ -168,17 +171,19 @@ export class PlacementService {
       solution: this.executeSA()
     });
 
-    this.solutions.push({
-      algorithm: 'Interference',
-      short: 'In',
-      solution: this.executeInterference()
-    });
+    if (this.compareInterferenceAffinity) {
+      this.solutions.push({
+        algorithm: 'Interference',
+        short: 'In',
+        solution: this.executeInterference()
+      });
 
-    this.solutions.push({
-      algorithm: 'Affinity',
-      short: 'Af',
-      solution: this.executeAffinity()
-    });
+      this.solutions.push({
+        algorithm: 'Affinity',
+        short: 'Af',
+        solution: this.executeAffinity()
+      });
+    }
 
     this.solutions.push({
       algorithm: 'Round Robin',
@@ -186,23 +191,25 @@ export class PlacementService {
       solution: this.executeRR()
     });
 
-    this.solutions.push({
-      algorithm: 'First Fit',
-      short: 'FFD',
-      solution: this.executeFF()
-    });
+    if (this.executeBinPacking) {
+      this.solutions.push({
+        algorithm: 'First Fit',
+        short: 'FFD',
+        solution: this.executeFF()
+      });
 
-    this.solutions.push({
-      algorithm: 'Best Fit',
-      short: 'BFD',
-      solution: this.executeBF()
-    });
+      this.solutions.push({
+        algorithm: 'Best Fit',
+        short: 'BFD',
+        solution: this.executeBF()
+      });
 
-    this.solutions.push({
-      algorithm: 'Worst Fit',
-      short: 'WFD',
-      solution: this.executeWF()
-    });
+      this.solutions.push({
+        algorithm: 'Worst Fit',
+        short: 'WFD',
+        solution: this.executeWF()
+      });
+    }
 
     this.generateChartData();
 
