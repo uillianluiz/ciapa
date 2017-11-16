@@ -121,6 +121,22 @@ export class PlacementService {
     return hillClimbing.exec(this.executeRR(), this.costFunction);
   }
 
+    /**
+   * Generate a placement based on the hill climbing algorithm
+   */
+  executeInterference(): Solution {
+    const hillClimbing = new HillClimbing(this.hcIterations);
+    return hillClimbing.exec(this.executeRR(), 'getCostInt');
+  }
+
+    /**
+   * Generate a placement based on the hill climbing algorithm
+   */
+  executeAffinity(): Solution {
+    const hillClimbing = new HillClimbing(this.hcIterations);
+    return hillClimbing.exec(this.executeRR(), 'getCostAff');
+  }
+
   resetData(): void {
     this.solutions = [];
     this.chartData = { dataAVG: [], dataMult: [], dataPMs: [] };
@@ -150,6 +166,18 @@ export class PlacementService {
       algorithm: 'Simulated Annealing',
       short: 'SA',
       solution: this.executeSA()
+    });
+
+    this.solutions.push({
+      algorithm: 'Interference',
+      short: 'In',
+      solution: this.executeInterference()
+    });
+
+    this.solutions.push({
+      algorithm: 'Affinity',
+      short: 'Af',
+      solution: this.executeAffinity()
     });
 
     this.solutions.push({

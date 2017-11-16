@@ -24,6 +24,27 @@ class Model {
         return this.costInterference(interferences) * this.costAffinity(affinities, tiers) * this.costCapacity(capacities, pmCapacity);
     }
 
+
+    costOnlyInterference(tiers: Tier[], pmCapacity: number) {
+        const interferences: Interference[] = [];
+        const capacities: Capacity[] = [];
+        for (const tier of tiers) {
+            interferences.push(tier.interference);
+            capacities.push(tier.capacity);
+        }
+        return this.costInterference(interferences) * this.costCapacity(capacities, pmCapacity);
+    }
+
+    costOnlyAffinity(tiers: Tier[], pmCapacity: number) {
+        const affinities: Affinity[] = [];
+        const capacities: Capacity[] = [];
+        for (const tier of tiers) {
+            affinities.push(tier.affinity);
+            capacities.push(tier.capacity);
+        }
+        return this.costAffinity(affinities, tiers) * this.costCapacity(capacities, pmCapacity);
+    }
+
     /** 
      * Calculates the cost given by the interference of each resource
      * @param interferences array of interferences

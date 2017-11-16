@@ -41,6 +41,14 @@ class PM {
     return this.cost;*/
   }
 
+  public getCostInt(): number {
+    return PM.model.costOnlyInterference(this.tiers, this.capacity);
+  }
+
+  public getCostAff(): number {
+    return PM.model.costOnlyAffinity(this.tiers, this.capacity);
+  }
+
   /**
      * Helper function that prints the PM and the tiers on it.
      */

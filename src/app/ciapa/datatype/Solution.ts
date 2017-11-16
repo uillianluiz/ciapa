@@ -46,6 +46,22 @@ class Solution {
     return cost / this.PMs.length;
   }
 
+  public getCostInt(): number {
+    let cost = 0;
+    for (const pm of this.PMs) {
+      cost += pm.getCostInt();
+    }
+    return cost / this.PMs.length;
+  }
+
+  public getCostAff(): number {
+    let cost = 0;
+    for (const pm of this.PMs) {
+      cost += pm.getCostAff();
+    }
+    return cost / this.PMs.length;
+  }
+
   /**
   * Generate a random modification of the current solution.
   * 50% of chance of swaping two tiers
