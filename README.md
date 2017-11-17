@@ -1,27 +1,28 @@
-# Ciapa
+# CIAPA
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.3.
+CIAPA is a **C**apacity, **I**nterference and **A**ffinity aware **P**lacement **A**lgorithm.
 
-## Development server
+This repository contains the web interface, which allows to:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+- Manage tiers (interference and affinity levels)
+- Manage PMs
+- Generate and compare placement settings
 
-## Code scaffolding
+The web interface is available [here](https://uillianluiz.github.io/ciapa/).
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+The CIAPA algorithms are available [here](src/app/ciapa/)
 
-## Build
+This project was built using:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+- Angular 
+- Clarity UI
+- Chart.js
 
-## Running unit tests
+---
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Download and Installation:
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+- Clone the repository: `git clone https://github.com/uillianluiz/ciapa.git`
+- Install the dependencies: `npm install`
+- Run the server: `npm start`
+- Open in browser: `http://localhost:4200/`
