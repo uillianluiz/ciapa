@@ -1,3 +1,8 @@
-app-tier-card, .row {
+app-tier-card,
+.row {
   cursor: default !important;
+}
+
+clr-dg-row {
+  cursor: pointer;
 }

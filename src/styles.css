@@ -4,11 +4,20 @@ body {
 }
 
 .main-container .content-container .content-area {
-	overflow-x: hidden;
+  overflow-x: hidden;
 }
 
 .nav-link {
   outline: none !important;
+}
+
+
+
+.modal-body .card {
+  margin-top: 0px;
+  box-shadow: none;
+  border-radius: none;
+  border: none;
 }
 
 .pre-bootstrap {
@@ -21,7 +30,7 @@ body {
   line-height: 20px;
   margin-bottom: 20px;
 
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
 .pre-bootstrap-spinner {
@@ -37,24 +46,24 @@ margin-top: calc(25% - 40px);*/
 
 @-webkit-keyframes sk-rotateplane {
   0% {
-    -webkit-transform: perspective(120px)
+    -webkit-transform: perspective(120px);
   }
   50% {
-    -webkit-transform: perspective(120px) rotateY(180deg)
+    -webkit-transform: perspective(120px) rotateY(180deg);
   }
   100% {
-    -webkit-transform: perspective(120px) rotateY(180deg) rotateX(180deg)
+    -webkit-transform: perspective(120px) rotateY(180deg) rotateX(180deg);
   }
 }
 
 @keyframes sk-rotateplane {
   0% {
     transform: perspective(120px) rotateX(0deg) rotateY(0deg);
-    -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg)
+    -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg);
   }
   50% {
     transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
-    -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg)
+    -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
   }
   100% {
     transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);

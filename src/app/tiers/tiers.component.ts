@@ -18,10 +18,54 @@ import { TiersService } from '../services/tiers.service';
   styleUrls: ['./tiers.component.scss']
 })
 export class TiersComponent implements OnInit {
+  public tierModal = false;
+  public tierIndex = -1;
+
   constructor(private _tierService: TiersService) {}
 
   get tiers(): Tier[] {
     return this._tierService.tiers;
+  }
+
+  openTierModal(tier: Tier) {
+    this.tierIndex = this._tierService.tiers.indexOf(tier);
+    this.tierModal = true;
+  }
+
+  cpu(degradation) {
+    return this.degradation(DegradationCPU, degradation);
+  }
+
+  disk(degradation) {
+    return this.degradation(DegradationDisk, degradation);
+  }
+
+  memory(degradation) {
+    return this.degradation(DegradationMemory, degradation);
+  }
+
+  cache(degradation) {
+    return this.degradation(DegradationCache, degradation);
+  }
+
+  size(size) {
+    for (const cap of Capacity.sizes) {
+      if (cap.capacity === size) {
+        return cap.name;
+      }
+    }
+  }
+
+  degradation(DegradationEnum, degradation: number) {
+    if (degradation === DegradationEnum.Absent) {
+      return 'Absent';
+    } else if (degradation === DegradationEnum.Low) {
+      return 'Low';
+    } else if (degradation === DegradationEnum.Moderate) {
+      return 'Moderate';
+    } else if (degradation === DegradationEnum.High) {
+      return 'High';
+    }
   }
 
   ngOnInit() {}

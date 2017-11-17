@@ -1,4 +1,11 @@
-import { Component, OnInit, Input, Injectable } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Injectable,
+  Output,
+  EventEmitter
+} from '@angular/core';
 import {
   DegradationCPU,
   DegradationMemory,
@@ -17,6 +24,7 @@ import { TiersService } from '../../services/tiers.service';
 @Injectable()
 export class TierCardComponent implements OnInit {
   @Input('tierId') tierId: number;
+  @Output() tierIdChange: EventEmitter<number> = new EventEmitter<number>();
 
   public _deleteTierModal = false;
 
@@ -56,6 +64,7 @@ export class TierCardComponent implements OnInit {
   }
 
   deleteTierHandler(): void {
+    this.tierIdChange.emit(-1);
     this._tiersService.tiers.splice(this.tierId, 1);
   }
 }
