@@ -1,7 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 
-import 'clarity-icons';
-import 'clarity-icons/shapes/all-shapes';
+
 import { TiersService } from '../services/tiers.service';
 import { Router } from '@angular/router';
 import { PlacementService } from '../services/placement.service';
