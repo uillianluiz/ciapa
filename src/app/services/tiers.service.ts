@@ -14,6 +14,7 @@ import { Capacity } from '../ciapa/datatype/Capacity';
 import * as CircularJSON from 'circular-json';
 import { ToastrService } from 'ngx-toastr';
 import Util from '../ciapa/functions/Util';
+import { tiers1 } from './tiers';
 
 @Injectable()
 export class TiersService {
@@ -30,7 +31,7 @@ export class TiersService {
         DegradationCPU[opt[Util.getRandomInt(0, 4)]],
         DegradationMemory[opt[Util.getRandomInt(0, 4)]],
         DegradationDisk[opt[Util.getRandomInt(0, 4)]],
-        DegradationCache[opt[Util.getRandomInt(0, 4)]],
+        DegradationCache[opt[Util.getRandomInt(0, 4)]]
       );
     }
     return new Interference(
@@ -47,7 +48,9 @@ export class TiersService {
 
   private capacity(random = false): Capacity {
     if (random) {
-      return new Capacity(Capacity.sizes[Util.getRandomInt(0, Capacity.sizes.length)].capacity);
+      return new Capacity(
+        Capacity.sizes[Util.getRandomInt(0, Capacity.sizes.length)].capacity
+      );
     }
     return new Capacity(0.05);
   }
@@ -59,13 +62,21 @@ export class TiersService {
   }
 
   newTier(): void {
-    const tier = new Tier(this.interference(), this.affinity(), this.capacity());
+    const tier = new Tier(
+      this.interference(),
+      this.affinity(),
+      this.capacity()
+    );
     tier.name = 'tier' + (this.tiers.length + 1);
     this.tiers.unshift(tier);
   }
 
   newRandomTier(): void {
-    const tier = new Tier(this.interference(true), this.affinity(), this.capacity(true));
+    const tier = new Tier(
+      this.interference(true),
+      this.affinity(),
+      this.capacity(true)
+    );
     tier.name = 'tier' + (this.tiers.length + 1);
     this.tiers.unshift(tier);
   }
@@ -84,6 +95,12 @@ export class TiersService {
     } else {
       this.tiers = CircularJSON.parse(localStorage.getItem('tiers'));
       return true;
+    }
+  }
+
+  loadTiers(id) {
+    if (id === '1') {
+      this.tiers = CircularJSON.parse(tiers1);
     }
   }
 }

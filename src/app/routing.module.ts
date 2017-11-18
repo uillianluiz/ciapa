@@ -12,6 +12,7 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   { path: 'tiers', component: TiersComponent },
+  { path: 'tiers/:id', component: TiersComponent },
   { path: 'pms', component: PmsComponent },
   { path: 'placement', component: PlacementComponent },
   { path: '**', redirectTo: '/404' }

@@ -11,6 +11,7 @@ import {
   DegradationDisk
 } from '../ciapa/datatype/Degradation';
 import { TiersService } from '../services/tiers.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-tiers',
@@ -21,7 +22,14 @@ export class TiersComponent implements OnInit {
   public tierModal = false;
   public tierIndex = -1;
 
-  constructor(private _tierService: TiersService) {}
+  constructor(
+    private _tierService: TiersService,
+    private _route: ActivatedRoute
+  ) {
+    if (this._route.snapshot.paramMap.has('id')) {
+      this._tierService.loadTiers(this._route.snapshot.paramMap.get('id'));
+    }
+  }
 
   get tiers(): Tier[] {
     return this._tierService.tiers;
