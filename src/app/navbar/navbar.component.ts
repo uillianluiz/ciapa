@@ -56,7 +56,7 @@ export class NavbarComponent implements OnInit {
   }
 
   load(): void {
-    if (this._tiersService.load() || this._pmsService.load()) {
+    if (this._tiersService.load() && this._pmsService.load()) {
       this.toastr.success(
         'Project was successfully loaded from your local storage.',
         'Success'
