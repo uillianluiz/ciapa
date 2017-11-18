@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { PmsService } from '../../services/pms.service';
 import { PM } from '../../ciapa/datatype/PM';
 
@@ -9,6 +9,7 @@ import { PM } from '../../ciapa/datatype/PM';
 })
 export class PmCardComponent implements OnInit {
   @Input('pmId') pmId: number;
+  @Output() pmIdChange: EventEmitter<number> = new EventEmitter<number>();
 
   public _deletePMModal = false;
   public _infoModel = false;
@@ -23,6 +24,7 @@ export class PmCardComponent implements OnInit {
   }
 
   deletePMHandler(): void {
+    this.pmIdChange.emit(-1);
     this._pmsService.pms.splice(this.pmId, 1);
   }
 

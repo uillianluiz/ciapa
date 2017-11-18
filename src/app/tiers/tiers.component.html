@@ -29,6 +29,6 @@
 
 <clr-modal *ngIf="tierModal && tierIndex != -1" [(clrModalOpen)]="tierModal">
   <div class="modal-body">
-    <app-tier-card class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3" [(tierId)]="tierIndex"></app-tier-card>
+    <app-tier-card [(tierId)]="tierIndex"></app-tier-card>
   </div>
 </clr-modal>

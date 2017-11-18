@@ -1,9 +1,26 @@
 <app-empty-list *ngIf="pms.length == 0" item="PM"></app-empty-list>
-<div class="content-container">
+<div class="container">
   <div class="content-area">
-    <div class="row" dnd-sortable-container [dropZones]="['pms']" [sortableData]="pms">
-      <app-pm-card class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3" *ngFor="let pm of pms; let i = index" [pmId]="i"
-        dnd-sortable [sortableIndex]="i"></app-pm-card>
-    </div>
+
+    <clr-datagrid>
+      <clr-dg-placeholder>Start by adding a PM!</clr-dg-placeholder>
+      <clr-dg-column [clrDgField]="'name'">Name</clr-dg-column>
+      <clr-dg-column [clrDgField]="'capacity'">Capacity</clr-dg-column>
+
+      <clr-dg-row *clrDgItems="let pm of pms; let i=index" (click)="openPMModal(pm)">
+        <clr-dg-cell>{{pm.name}}</clr-dg-cell>
+        <clr-dg-cell>{{pm.capacity}}</clr-dg-cell>
+      </clr-dg-row>
+
+      <clr-dg-footer>{{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} PMs
+        <clr-dg-pagination #pagination [clrDgPageSize]="10"></clr-dg-pagination>
+      </clr-dg-footer>
+    </clr-datagrid>
   </div>
 </div>
+
+<clr-modal *ngIf="pmModal && pmIndex != -1" [(clrModalOpen)]="pmModal">
+  <div class="modal-body">
+    <app-pm-card [(pmId)]="pmIndex"></app-pm-card>
+  </div>
+</clr-modal>

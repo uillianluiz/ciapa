@@ -20,6 +20,10 @@ body {
   border: none;
 }
 
+.datagrid-body {
+  overflow-y: hidden !important;
+}
+
 .pre-bootstrap {
   position: absolute;
   left: calc(50% - 30px);
