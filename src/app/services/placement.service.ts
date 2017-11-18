@@ -32,7 +32,7 @@ export class PlacementService {
     public _tiersService: TiersService,
     private _pmsService: PmsService,
     private toastr: ToastrService
-  ) { }
+  ) {}
 
   /**
    * Create a copy of the PMs (clone)
@@ -52,7 +52,7 @@ export class PlacementService {
     const tiers = <Tier[]>Object.assign(
       CircularJSON.parse(CircularJSON.stringify(this._tiersService.tiers))
     );
-    tiers.sort(function (a, b) {
+    tiers.sort(function(a, b) {
       return b.capacity.capacity - a.capacity.capacity;
     });
     return tiers;
@@ -159,66 +159,73 @@ export class PlacementService {
       return;
     }
 
-    this.solutions.push({
-      algorithm: 'Hill Climbing',
-      short: 'HC',
-      solution: this.executeHC()
-    });
-
-    this.solutions.push({
-      algorithm: 'Simulated Annealing',
-      short: 'SA',
-      solution: this.executeSA()
-    });
-
-    if (this.compareInterferenceAffinity) {
+    setTimeout(() => {
       this.solutions.push({
-        algorithm: 'Interference',
-        short: 'In',
-        solution: this.executeInterference()
+        algorithm: 'Hill Climbing',
+        short: 'HC',
+        solution: this.executeHC()
       });
 
-      this.solutions.push({
-        algorithm: 'Affinity',
-        short: 'Af',
-        solution: this.executeAffinity()
-      });
-    }
+      setTimeout(() => {
+        this.solutions.push({
+          algorithm: 'Simulated Annealing',
+          short: 'SA',
+          solution: this.executeSA()
+        });
 
-    this.solutions.push({
-      algorithm: 'Round Robin',
-      short: 'RR',
-      solution: this.executeRR()
-    });
+        setTimeout(() => {
+          if (this.compareInterferenceAffinity) {
+            this.solutions.push({
+              algorithm: 'Interference',
+              short: 'In',
+              solution: this.executeInterference()
+            });
 
-    if (this.executeBinPacking) {
-      this.solutions.push({
-        algorithm: 'First Fit',
-        short: 'FFD',
-        solution: this.executeFF()
-      });
+            this.solutions.push({
+              algorithm: 'Affinity',
+              short: 'Af',
+              solution: this.executeAffinity()
+            });
+          }
+          this.solutions.push({
+            algorithm: 'Round Robin',
+            short: 'RR',
+            solution: this.executeRR()
+          });
 
-      this.solutions.push({
-        algorithm: 'Best Fit',
-        short: 'BFD',
-        solution: this.executeBF()
-      });
+          setTimeout(() => {
+            if (this.executeBinPacking) {
+              this.solutions.push({
+                algorithm: 'First Fit',
+                short: 'FFD',
+                solution: this.executeFF()
+              });
 
-      this.solutions.push({
-        algorithm: 'Worst Fit',
-        short: 'WFD',
-        solution: this.executeWF()
-      });
-    }
+              this.solutions.push({
+                algorithm: 'Best Fit',
+                short: 'BFD',
+                solution: this.executeBF()
+              });
 
-    this.generateChartData();
+              this.solutions.push({
+                algorithm: 'Worst Fit',
+                short: 'WFD',
+                solution: this.executeWF()
+              });
+            }
 
-    this.toastr.success(
-      'All placement settings were successfully generated.',
-      'Success'
-    );
+            this.generateChartData();
 
-    fn();
+            this.toastr.success(
+              'All placement settings were successfully generated.',
+              'Success'
+            );
+
+            fn();
+          }, 10);
+        }, 10);
+      }, 10);
+    }, 10);
   }
 
   /**
