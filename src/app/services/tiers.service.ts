@@ -14,7 +14,7 @@ import { Capacity } from '../ciapa/datatype/Capacity';
 import * as CircularJSON from 'circular-json';
 import { ToastrService } from 'ngx-toastr';
 import Util from '../ciapa/functions/Util';
-import { tiers1 } from './tiers';
+import { tiers1, tiers2, tiers3, tiers4 } from './tiers';
 
 @Injectable()
 export class TiersService {
@@ -101,6 +101,12 @@ export class TiersService {
   loadTiers(id) {
     if (id === '1') {
       this.tiers = CircularJSON.parse(tiers1);
+    } else if (id === '2') {
+      this.tiers = CircularJSON.parse(tiers2);
+    } else if (id === '3') {
+      this.tiers = CircularJSON.parse(tiers3);
+    } else if (id === '4') {
+      this.tiers = CircularJSON.parse(tiers4);
     }
   }
 }
